@@ -1,27 +1,15 @@
-﻿/*
-Created: 02/09/2020
-Modified: 08/09/2020
-Model: MySQL 8.0
-Database: MySQL 8.0
-*/
-
--- Create tables section -------------------------------------------------
-
--- Table users
-
+﻿
 CREATE TABLE `users`
 (
-  `id` Int NOT NULL,
+  `id` Int NOT NULL AUTO_INCREMENT,
   `name` Char(50) NOT NULL,
   `username` Char(50) NOT NULL,
   `bio` Text,
   `email` Char(50) NOT NULL,
   `phone_number` Char(20),
-  `password` Char(255) NOT NULL
+  `password` Char(255) NOT NULL,
+  PRIMARY KEY (`id`)
 )
-;
-
-ALTER TABLE `users` ADD PRIMARY KEY (`id`)
 ;
 
 -- Table followers
