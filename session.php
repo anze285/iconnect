@@ -8,6 +8,12 @@ if(!isset($_SESSION['user_id'])
     header("Location: login.php");
     die();
 }
+if (isset($_SESSION['user_id'])
+    && ($_SERVER['REQUEST_URI'] == '/instantgram/login.php'
+    || $_SERVER['REQUEST_URI'] == '/instantgram/registration.php'
+    || $_SERVER['REQUEST_URI'] == '/instantgram/login_check.php')) {
+    header("Location: index.php");
+}
 
 function isAdmin() {
     $result = false;

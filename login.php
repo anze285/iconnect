@@ -1,22 +1,28 @@
 <?php
 include_once './header.php';
 ?>
-<div class="login-main">
+<div class="login-main m-4 p-4">
     <div class="login-content">
-        <h1>Instantgram</h1>
+        <h1 class="instantgram pb-4 mb-4">Instantgram</h1>
 
         <form action="login_check.php" method="post">
-            <input type="text" name="email" class="form-control mb-4" placeholder="Username or email" required="required" />
-            <input type="password" name="pass" class="form-control mb-4" placeholder="Password" required="required" /><br>
-            <input type="submit" class="btn btn-primary" value="Log In" />
+            <input id="login-email" type="text" name="email" class="form-control mb-1 w-75 mx-auto border bg-fafafa fs-1 py-2" placeholder="Username or email" required="required" />
+            <input id="login-pass" type="password" name="pass" class="form-control mb-1 w-75 mx-auto border bg-fafafa fs-1 py-2" placeholder="Password" required="required" />
+            <input type="submit" class="btn btn-primary w-75 mb-2 fs-1 mt-3 font-weight-bolder bg-0095F6 p-1 first-button fs-2" value="Log In" />
         </form>
-        <br>
-        <p>login with facebook</p>
-        <p>login with google</p>
-        <p>forgot password</p>
+
+        <hr class="w-75 bc-dbdbdb mb-4">
+
+        <p class="fs-2 b font-weight-bolder">login with facebook</p>
+        <p class="fs-2 b font-weight-bolder">login with google</p>
+
+        <a href="#" class="fs-1 c-00376B">Forgot password?</a>
+        
     </div>
-    <div class="login-content">
-        <p>Don't have an account? <a href="registration.php">Sing up</a></p>
+    <div class="login-content d-flex justify-content-center align-items-center flex-column p-3 mb-0">
+        <div class="">
+            <p class="fs-2 mb-0 font-weight-100">Don't have an account? <a href="registration.php" class="fs-2 font-weight-600 sign-a">Sing up</a></p>
+        </div>
     </div>
 </div>
 <?php
