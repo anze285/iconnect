@@ -1,4 +1,6 @@
 ﻿
+-- Table users
+
 CREATE TABLE `users`
 (
   `id` Int NOT NULL AUTO_INCREMENT,
@@ -8,6 +10,7 @@ CREATE TABLE `users`
   `email` Char(50) NOT NULL,
   `phone_number` Char(20),
   `password` Char(255) NOT NULL,
+  `profile_pic` Char(50),
   PRIMARY KEY (`id`)
 )
 ;
@@ -38,6 +41,7 @@ CREATE TABLE `posts`
   `description` Text,
   `user_id` Int NOT NULL,
   `location_id` Int,
+  `date` Timestamp NOT NULL,
   PRIMARY KEY (`id`)
 )
 ;
@@ -117,6 +121,21 @@ CREATE INDEX `IX_Relationship10` ON `saved_posts` (`user_id`)
 CREATE INDEX `IX_Relationship11` ON `saved_posts` (`post_id`)
 ;
 
+-- Table images
+
+CREATE TABLE `images`
+(
+  `id` Int NOT NULL AUTO_INCREMENT,
+  `root` Char(50) NOT NULL,
+  `date` Timestamp NOT NULL,
+  `post_id` Int NOT NULL,
+  PRIMARY KEY (`id`)
+)
+;
+
+CREATE INDEX `IX_Relationship12` ON `images` (`post_id`)
+;
+
 -- Create foreign keys (relationships) section -------------------------------------------------
 
 ALTER TABLE `followers` ADD CONSTRAINT `Relationship1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
@@ -150,6 +169,9 @@ ALTER TABLE `saved_posts` ADD CONSTRAINT `Relationship10` FOREIGN KEY (`user_id`
 ;
 
 ALTER TABLE `saved_posts` ADD CONSTRAINT `Relationship11` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+;
+
+ALTER TABLE `images` ADD CONSTRAINT `Relationship12` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ;
 
 
