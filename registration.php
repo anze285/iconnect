@@ -3,7 +3,7 @@ include_once './header.php';
 ?>
 <div class="registration-main m-4 p-4">
     <div class="registration-content">
-        <h1 class="instantgram pb-4 mb-4">Instantgram</h1>
+        <h1 class="instantgram pb-4 mb-4 big-text">Instantgram</h1>
 
         <form action="user_insert.php" method="post">
             <input type="text" name="name" class="form-control mb-1 w-75 mx-auto border bg-fafafa fs-1 py-2" placeholder="Name and surname" required="required" />
