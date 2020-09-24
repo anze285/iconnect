@@ -26,3 +26,4 @@ if (!empty($name) && !empty($email)
 else {
     header("Location: registration.php");
 }
+?>
