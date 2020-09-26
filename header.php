@@ -63,7 +63,19 @@ include_once './session.php';
                                           <a class="nav-link" href="#"><span class="flaticon-heart"></span></a>
                                     </li>
                                     <li class="nav-item">
-                                          <a class="nav-link" href="#"><span class="flaticon-user"></span></a>
+                                          <div class="dropdown">
+                                                <a class="mt-4" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                      <span class="flaticon-user profile-pic"></span>
+                                                </a>
+
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                      <a class="dropdown-item" href="profile.php">Profile</a>
+                                                      <a class="dropdown-item" href="saved.php">Saved</a>
+                                                      <a class="dropdown-item" href="edit_profile.php">Edit profile</a>
+                                                      <div class="dropdown-divider"></div>
+                                                      <a class="dropdown-item" href="sign_out.php">Log Out</a>
+                                                </div>
+                                          </div>
                                     </li>
                                     <!--<li class="nav-item dropdown">
                                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

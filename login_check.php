@@ -18,6 +18,9 @@ if (!empty($email) && !empty($pass)) {
             header("Location: index.php");
             die();
         }
+        else {
+            header("Location: login.php");
+        }
     }
 }
 header("Location: login.php");

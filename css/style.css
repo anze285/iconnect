@@ -8,6 +8,16 @@ a:hover{
 hr{
     height: 1px;
 }
+input {
+    box-shadow: none !important;
+}
+/*EDIT USER*/
+.w-35 {
+    width: 35%;
+}
+.w-60 {
+    width: 52%;
+}
 /*INDEX*/
 @media only screen and (max-width: 575px){
     .navbar-nav {
@@ -39,6 +49,19 @@ hr{
     line-height: 1rem;
 }
 /*NAVBAR*/
+.dropdown-menu {
+    right: -10px !important;
+    left: auto;
+    margin-top: 10px;
+}
+.profile-pic {
+    position: relative;
+    top: 7px;
+}
+.dropdown-item:active{
+    background-color: #efefef;
+    color: black;
+}
 .navbar-custom{
     border-bottom: 1px solid #dbdbdb;
     border-radius: 1px;;
@@ -62,6 +85,9 @@ hr{
     }
 }
 /*LOGIN and REGISTRATION*/
+.btn:active:focus{
+    box-shadow: none !important;
+}
 .bg-fafafa{
     background-color: #fafafa;
 }
@@ -74,7 +100,7 @@ hr{
 .login-main, .registration-main, .password-main{
     text-align: center;
 }
-.login-content, .registration-content, .password-content{
+.login-content, .registration-content{
     background-color: white;
     border: 1px solid #dbdbdb;
     padding: 20px 0;
@@ -83,6 +109,17 @@ hr{
     border-radius: 1px;
     align-items: center;
     max-width: 22rem;
+    width: 100%
+}
+.password-content{
+    background-color: white;
+    border: 1px solid #dbdbdb;
+    padding: 20px 0;
+    margin: 20px auto 10px;
+    -webkit-box-align: center;
+    border-radius: 1px;
+    align-items: center;
+    max-width: 30rem;
     width: 100%
 }
 .instantgram{
