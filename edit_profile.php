@@ -36,6 +36,16 @@ $user = $stmt->fetch();
                     <textarea name="bio" id="colFormLabelSm" class="form-control mb-1 w-75 border bg-fafafa fs-1 ml-md-4 mx-auto" style="height: 100px;"><?php echo $user['bio']; ?></textarea>
                 </div>
             </div>
+            <?php
+            if (isset($_SESSION['profile_error'])) {
+                echo '<div class="w-75 mx-auto"><p class="text-danger fs-1">' . $_SESSION["profile_error"] . '</p></div>';
+            }
+            if (isset($_SESSION['profile_changed'])) {
+                echo '<div class="w-75 mx-auto"><p class="text-success fs-1">' . $_SESSION["profile_changed"] . '</p></div>';
+            }
+            unset($_SESSION['profile_changed']);
+            unset($_SESSION['profile_error']);
+            ?>
             <div class="w-75 ml-5 pl-4">
                 <input type="submit" class="btn btn-primary w-35 mb-2 fs-1 mt-0 font-weight-bolder bg-0095F6 p-1 first-button fs-2 ml-md-4" value="Submit" />
                 <a class="btn btn-primary w-60 mb-2 fs-1 mt-0 font-weight-bolder bg-0095F6 p-1 first-button fs-2" href="password.php">Change password</a>

@@ -17,8 +17,14 @@ if (!empty($oldpass) && !empty($pass1) && ($pass1 == $pass2)) {
         $query = "UPDATE users SET password = ? WHERE id = ?";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$pass, $_SESSION['user_id']]);
+        $_SESSION['password_changed'] = "Password was successfully changed.";
     }
-    header("Location: password.php");
+    else{
+        $_SESSION['password_error'] = "Wrong old password.";
+    }
+}
+else {
+    $_SESSION['password_error'] = "Passwords don't match.";
 }
 header("Location: password.php");
 ?>

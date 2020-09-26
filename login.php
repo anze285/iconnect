@@ -8,11 +8,15 @@ include_once './header.php';
         <form action="login_check.php" method="post">
             <input id="login-email" type="text" name="email" class="form-control mb-1 w-75 mx-auto border bg-fafafa fs-1 py-2" placeholder="Username or email" required="required" />
             <input id="login-pass" type="password" name="pass" class="form-control mb-1 w-75 mx-auto border bg-fafafa fs-1 py-2" placeholder="Password" required="required" />
-            <input type="submit" class="btn btn-primary w-75 mb-2 fs-1 mt-3 font-weight-bolder bg-0095F6 p-1 first-button fs-2" value="Log In" />
+            <?php 
+            if (isset($_SESSION['login_error'])) {
+                echo '<div class="w-75 mx-auto"><p class="text-danger fs-1">'.$_SESSION["login_error"].'</p></div>';
+            }
+            ?>
+            <input type="submit" class="btn btn-primary w-75 mb-2 <?php if (!isset($_SESSION['login_error'])) { echo "mt-3"; } unset($_SESSION['login_error']); ?> fs-1 font-weight-bolder bg-0095F6 p-1 first-button fs-2" value="Log In" />
         </form>
 
         <hr class="w-75 bc-dbdbdb mb-4">
-
         <p class="fs-2 b font-weight-bolder">login with facebook</p>
         <p class="fs-2 b font-weight-bolder">login with google</p>
 

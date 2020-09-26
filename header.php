@@ -51,7 +51,7 @@ include_once './session.php';
                         <div class="navbar-customized ml-md-0 ml-auto mr-6" id="navbarSupportedContent">
                               <ul class="navbar-nav">
                                     <li class="nav-item">
-                                          <a class="nav-link" href="index.php"><span class="flaticon-home"></span><span class="sr-only">(current)</span></a>
+                                          <a class="nav-link" href="index.php"><span class="flaticon-home"></span></a>
                                     </li>
                                     <li class="nav-item">
                                           <a class="nav-link" href="#"><span class="flaticon-compass"></span></a>

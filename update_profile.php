@@ -30,12 +30,13 @@ if (!empty($name) && !empty($email)) {
         $query = "UPDATE users SET name = ?, email = ?, phone_number = ?, bio = ? WHERE id = ?";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$name, $email, $phone, $bio, $_SESSION['user_id']]);
-        header("Location: edit_profile.php");
+        $_SESSION['profile_changed'] = "Profile update was successful.";
     }
     else {
-        header("Location: edit_profile.php");
+        $_SESSION['profile_error'] = "Profile with this email already exists.";
     }
 }
 else {
-    header("Location: edit_profile.php");
+    $_SESSION['profile_error'] = "Something went wrong.";
 }
+header("Location: edit_profile.php");

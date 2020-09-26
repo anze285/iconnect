@@ -25,13 +25,14 @@
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
 [class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
   font-family: Flaticon;
-        font-size: 20px;
-font-style: normal;
-margin-left: 20px;
-color: black;
+  font-size: 20px;
+  font-style: normal;
+  margin-left: 20px;
+  color: black;
 }
 
-.flaticon-home:before { content: "\f100"; }
+
+.flaticon-home:before { content: "\f100";}
 .flaticon-compass:before { content: "\f101"; }
 .flaticon-compass-1:before { content: "\f102"; }
 .flaticon-heart:before { content: "\f103"; }
