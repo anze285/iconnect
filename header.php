@@ -68,7 +68,7 @@ include_once './session.php';
                                                       <span class="flaticon-user profile-pic"></span>
                                                 </a>
 
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
                                                       <a class="dropdown-item" href="profile.php">Profile</a>
                                                       <a class="dropdown-item" href="saved.php">Saved</a>
                                                       <a class="dropdown-item" href="edit_profile.php">Edit profile</a>

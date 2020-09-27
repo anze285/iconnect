@@ -12,8 +12,12 @@ include_once './header.php';
             if (isset($_SESSION['login_error'])) {
                 echo '<div class="w-75 mx-auto"><p class="text-danger fs-1">'.$_SESSION["login_error"].'</p></div>';
             }
+            if(isset($_SESSION['register_successful'])){
+                echo '<div class="w-75 mx-auto"><p class="text-success fs-1">' . $_SESSION["register_successful"] . '</p></div>';
+            }
             ?>
-            <input type="submit" class="btn btn-primary w-75 mb-2 <?php if (!isset($_SESSION['login_error'])) { echo "mt-3"; } unset($_SESSION['login_error']); ?> fs-1 font-weight-bolder bg-0095F6 p-1 first-button fs-2" value="Log In" />
+            <input type="submit" class="btn btn-primary w-75 mb-2 <?php if (!isset($_SESSION['login_error']) && !isset($_SESSION['register_successful'])) { 
+            echo "mt-3"; } unset($_SESSION['login_error']); unset($_SESSION['register_successful']) ?> fs-1 font-weight-bolder bg-0095F6 p-1 first-button fs-2" value="Log In" />
         </form>
 
         <hr class="w-75 bc-dbdbdb mb-4">

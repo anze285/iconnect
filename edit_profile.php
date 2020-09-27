@@ -10,7 +10,10 @@ $user = $stmt->fetch();
 <h2 class="mt-5 pt-5 text-center instantgram font-weight-normal">Edit profile</h2>
 <div class="password-main mt-5 mb-4">
     <div class="password-content">
-        <h4 class="mb-4 font-weight-normal"><?php echo $user['username']; ?></h4>
+        <div class="d-flex justify-content-center mb-4">
+            <img class="custom-img mr-3" src="images/profile.png" alt="profile-pic">
+            <h4 class="font-weight-normal my-auto"><?php echo $user['username']; ?></h4>
+        </div>
         <form action="update_profile.php" method="post">
             <div class="form-group row">
                 <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm pl-md-5">Name</label>

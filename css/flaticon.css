@@ -30,7 +30,14 @@
   margin-left: 20px;
   color: black;
 }
-
+@media only screen and (max-width: 405px) {
+  [class^="flaticon-"]:before,
+  [class*=" flaticon-"]:before,
+  [class^="flaticon-"]:after,
+  [class*=" flaticon-"]:after {
+    margin-left: 10px !important;
+  }
+}
 
 .flaticon-home:before { content: "\f100";}
 .flaticon-compass:before { content: "\f101"; }

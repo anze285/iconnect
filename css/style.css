@@ -50,8 +50,6 @@ input {
 }
 /*NAVBAR*/
 .dropdown-menu {
-    right: -10px !important;
-    left: auto;
     margin-top: 10px;
 }
 .profile-pic {
@@ -75,6 +73,15 @@ input {
 
 .mr-6 {
     margin-right: 15%;
+}
+.navbar-expand-sm .navbar-nav .dropdown-menu {
+    position: absolute;
+}
+@media only screen and (max-width: 405px) {
+
+    .fs-3{
+        font-size: 1.4rem !important;
+    }
 }
 @media only screen and (max-width: 1100px){
     .mr-6{
