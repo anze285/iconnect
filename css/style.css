@@ -11,6 +11,9 @@ hr{
 input {
     box-shadow: none !important;
 }
+textarea{
+    box-shadow: none !important;
+}
 /*EDIT USER*/
 .w-35 {
     width: 35%;
@@ -28,6 +31,22 @@ input {
 .fs-4{
     font-size: 0.6rem;
 }
+.w-custom{
+    width: 70% !important;
+}
+@media only screen and (max-width: 1200px) {
+    .w-custom {
+        width: 100% !important;
+    }
+}
+.img-strech{
+    width: 100% !important;
+    object-fit: fill !important;
+    height: 300px !important;
+}
+.w-15{
+    width: 15% !important;
+}
 .custom-width{
     width: 600px;
     object-fit: cover;
@@ -40,10 +59,21 @@ input {
     max-height: 60px;
     border-radius: 100%;
 }
-.custom-img1{
+.custom-img1 {
     max-width: 40px;
     max-height: 40px;
     border-radius: 100%;
+}
+.custom-img2 {
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 100%;
+}
+@media only screen and (max-width: 575px) {
+    .custom-img2 {
+        max-width: 80px;
+        max-height: 80px;
+    }
 }
 .line-height{
     line-height: 1rem;
