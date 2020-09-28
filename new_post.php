@@ -48,19 +48,18 @@ if (
         echo "Sorry, your file was not uploaded.";
         // if everything is ok, try to upload file
     } else {
-        $date = date('m/d/Y h:i:s a', time());
-        $query = "INSERT INTO posts (description, user_id, date) VALUES (?,?,?)";
+        $query = "INSERT INTO posts (description, user_id, date) VALUES (?,?,CURRENT_TIMESTAMP())";
         $stmt = $pdo->prepare($query);
-        $stmt->execute([$description, $_SESSION['user_id'], $date]);
+        $stmt->execute([$description, $_SESSION['user_id']]);
 
         $query = "SELECT id FROM posts WHERE user_id=? ORDER BY id DESC LIMIT 1";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$_SESSION['user_id']]);
         $post_id1 = $stmt->fetch();
 
-        $query = "INSERT INTO images (root, date, post_id) VALUES (?,?,?)";
+        $query = "INSERT INTO images (root, date, post_id) VALUES (?,CURRENT_TIMESTAMP(),?)";
         $stmt = $pdo->prepare($query);
-        $stmt->execute([$target_file, $date, $post_id1['id']]);
+        $stmt->execute([$target_file, $post_id1['id']]);
 
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
             echo "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.";

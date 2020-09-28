@@ -6,7 +6,8 @@ include_once './database.php';
 <div class="d-flex justify-content-center custom-index-div">
     <div class="">
         <?php
-        $query = "SELECT u.username AS username, p.description AS description, i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id";
+        $query = "SELECT u.username AS username, p.description AS description, i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id
+        INNER JOIN followers f ON u.id = f.user_id OR u.id = f.follower_id ORDER BY p.date DESC";
         $stmt = $pdo->prepare($query);
         $stmt->execute();
         while ($post = $stmt->fetch()) {
@@ -54,41 +55,54 @@ include_once './database.php';
         }
         ?>
     </div>
+    <?php
+    $query = "SELECT name, username FROM users WHERE id = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$_SESSION['user_id']]);
+    $user = $stmt->fetch();
+    ?>
     <div class="d-none d-lg-block ml-4 mt-5">
         <div class="ml-1 mb-3 line-height">
-            <img class="custom-img float-left mr-3" src="images/profile.png" alt="profile-pic">
-            <span class="font-weight-bolder fs-2 float-left mt-2">anze_gorsek</span><br>
-            <span class="text-black-50 fs-1 clearfix">Anže Goršek</span>
+            <div class="float-left mb-0">
+                <img class="custom-img mr-3" src="images/profile.png" alt="profile-pic">
+            </div>
+            <div class="float-left ml-1">
+                <div class="mt-2 pt-1">
+                    <span class="font-weight-bolder"><?php echo $user['username']; ?></span><br>
+                    <span class="text-black-50 fs-2"><?php echo $user['name']; ?></span>
+                </div>
+            </div>
+            <div class="clearfix">
+
+            </div>
         </div>
-        <div>
+        <div class="">
 
-            <h6 class="text-black-50">Suggestions For You</h6>
+            <div class="mb-3">
+                <h6 class="text-black-50">Suggestions For You</h6>
+            </div>
+            <?php
+            $query = "SELECT id, name, username FROM users WHERE id != ? ORDER BY RAND() LIMIT 5";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([$_SESSION['user_id']]);
+            while ($user = $stmt->fetch()) {
+            ?>
+                <form action="profile_session.php" method="POST">
+                    <input type="number" name="id" value="<?php echo $user['id']; ?>" hidden>
+                    <div class=" mt-2 line-height" role="button" onclick="this.parentNode.submit();">
+                        <div class="float-left">
+                            <img class="custom-img1 mr-3" src="images/profile.png" alt="profile-pic">
+                        </div>
+                        <div class="float-left">
+                            <span class="font-weight-bolder fs-2 mt-1"><?php echo $user['username']; ?></span><br>
+                            <span class="text-black-50 fs-1"><?php echo $user['name']; ?></span>
+                        </div>
+                        <div class="clearfix">
 
-            <div class="mt-3 line-height">
-                <img class="custom-img1 float-left mr-3" src="images/profile.png" alt="profile-pic">
-                <span class="font-weight-bolder fs-2 float-left mt-1">anze_gorsek</span><br>
-                <span class="text-black-50 fs-1 clearfix">Anže Goršek</span>
-            </div>
-            <div class="mt-3 line-height">
-                <img class="custom-img1 float-left mr-3" src="images/profile.png" alt="profile-pic">
-                <span class="font-weight-bolder fs-2 float-left mt-1">anze_gorsek</span><br>
-                <span class="text-black-50 fs-1 clearfix">Anže Goršek</span>
-            </div>
-            <div class="mt-3 line-height">
-                <img class="custom-img1 float-left mr-3" src="images/profile.png" alt="profile-pic">
-                <span class="font-weight-bolder fs-2 float-left mt-1">anze_gorsek</span><br>
-                <span class="text-black-50 fs-1 clearfix">Anže Goršek</span>
-            </div>
-            <div class="mt-3 line-height">
-                <img class="custom-img1 float-left mr-3" src="images/profile.png" alt="profile-pic">
-                <span class="font-weight-bolder fs-2 float-left mt-1">anze_gorsek</span><br>
-                <span class="text-black-50 fs-1 clearfix">Anže Goršek</span>
-            </div>
-            <div class="mt-3 line-height">
-                <img class="custom-img1 float-left mr-3" src="images/profile.png" alt="profile-pic">
-                <span class="font-weight-bolder fs-2 float-left mt-1">anze_gorsek</span><br>
-                <span class="text-black-50 fs-1 clearfix">Anže Goršek</span>
-            </div>
+                        </div>
+                    </div>
+                </form>
+            <?php } ?>
         </div>
     </div>
 </div>
