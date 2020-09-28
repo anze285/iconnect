@@ -40,8 +40,8 @@ include_once './database.php';
                 while ($post = $stmt->fetch()) {
 
                 ?>
-                    <div class="col my-auto">
-                        <img class="img-fluid" src="<?php echo $post['root']; ?>" alt="post-pic">
+                    <div class="col mb-4">
+                        <img class="img-fluid img-strech" src="<?php echo $post['root']; ?>" alt="post-pic">
                     </div>
 
                 <?php
