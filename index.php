@@ -6,17 +6,20 @@ include_once './database.php';
 <div class="d-flex justify-content-center custom-index-div">
     <div class="">
         <?php
-        $query = "SELECT u.username AS username, p.description AS description, i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id
-        INNER JOIN followers f ON u.id = f.user_id OR u.id = f.follower_id ORDER BY p.date DESC";
+        $query = "SELECT u.id AS id, u.username AS username, p.description AS description, i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id
+        INNER JOIN followers f ON u.id = f.user_id ORDER BY p.date DESC";
         $stmt = $pdo->prepare($query);
         $stmt->execute();
         while ($post = $stmt->fetch()) {
         ?>
             <div class="bg-white my-5 border">
-                <div class="m-2 align-middle">
-                    <img class="custom-img1 mr-3" src="images/profile.png" alt="profile-pic">
-                    <span class="font-weight-bolder fs-2 mt-1"><?php echo $post['username']; ?></span>
-                </div>
+                <form action="profile_session.php" method="POST">
+                    <div class="m-2 align-middle" role="button" onclick="this.parentNode.submit();">
+                        <input type=" number" name="id" value="<?php echo $post['id']; ?>" hidden>
+                        <img class="custom-img1 mr-3" src="images/profile.png" alt="profile-pic">
+                        <span class="font-weight-bolder fs-2 mt-1"><?php echo $post['username']; ?></span>
+                    </div>
+                </form>
                 <div class="mt-2">
                     <img class="img-fluid custom-width" src="<?php echo $post['root']; ?>" alt="post-pic">
                 </div>
