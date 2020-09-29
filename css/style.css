@@ -39,6 +39,18 @@ textarea{
         width: 100% !important;
     }
 }
+.bg-fafafa{
+    background-color: none;
+}
+.bg-fafafa:hover{
+    background-color: #d3d3d3;
+}
+.left-auto{
+    top: 36px;
+    left: auto !important;
+    right: auto !important;
+    float: none !important;
+}
 .img-strech{
     width: 100% !important;
     object-fit: cover !important;

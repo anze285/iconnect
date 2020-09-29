@@ -65,7 +65,7 @@ include_once './database.php';
     $user = $stmt->fetch();
     ?>
     <div class="d-none d-lg-block ml-4 mt-5">
-        <div class="ml-1 mb-3 line-height">
+        <div class="ml-1 mb-3 line-height" type="button" onclick="window.location='profile.php';">
             <div class="float-left mb-0">
                 <img class="custom-img mr-3" src="images/profile.png" alt="profile-pic">
             </div>

@@ -39,14 +39,18 @@ include_once './session.php';
       <script>
             $(document).ready(function(e) {
                   $("#search").keyup(function() {
-                        $("#show_up").show();
                         var text = $(this).val();
                         $.ajax({
                               type: 'GET',
                               url: 'search.php',
                               data: 'txt=' + text,
                               success: function(data) {
-                                    $("#show_up").html(data);
+                                    if (text != '' && data != '') {
+                                          $("#show_up").show();
+                                          $("#show_up").html(data);
+                                    } else {
+                                          $("#show_up").hide();
+                                    }
                               }
                         });
                   })
@@ -62,9 +66,11 @@ include_once './session.php';
                         </div>
                         <div class="d-none d-md-block mx-auto">
                               <div class="form-inline my-2">
-                                    <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="names" id="search">
-                                    <span class="flaticon-search"></span>
+                                    <input class="form-control dropdown-toggle" type="text" placeholder="Search" name="names" id="search" aria-haspopup="true" aria-expanded="false">
+                                    <span type="button" class="flaticon-search"></span>
+                                    <div id="show_up" class="dropdown-menu left-auto dropdown-menu-right"></div>
                               </div>
+
                         </div>
                         <div class="navbar-customized ml-md-0 ml-auto mr-6" id="navbarSupportedContent">
                               <ul class="navbar-nav">
@@ -109,9 +115,6 @@ include_once './session.php';
                               </ul>
                         </div>
                   </nav>
-            </div>
-            <div id="show_up" class=" mt-5 pt-5">
-
             </div>
             <?php
             if (isAdmin()) {
