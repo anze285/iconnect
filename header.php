@@ -30,9 +30,28 @@ include_once './session.php';
 
       <!-- core CSS -->
       <link href="css/style.css" rel="stylesheet">
+
+      <!-- Search -->
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 </head>
 
 <body>
+      <script>
+            $(document).ready(function(e) {
+                  $("#search").keyup(function() {
+                        $("#show_up").show();
+                        var text = $(this).val();
+                        $.ajax({
+                              type: 'GET',
+                              url: 'search.php',
+                              data: 'txt=' + text,
+                              success: function(data) {
+                                    $("#show_up").html(data);
+                              }
+                        });
+                  })
+            });
+      </script>
       <?php
       if (isset($_SESSION['user_id'])) {
       ?>
@@ -42,11 +61,10 @@ include_once './session.php';
                               <a class="navbar-brand instantgram fs-3" href="index.php">Instantgram</a>
                         </div>
                         <div class="d-none d-md-block mx-auto">
-                              <form class="form-inline my-2">
-                                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                              <div class="form-inline my-2">
+                                    <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="names" id="search">
                                     <span class="flaticon-search"></span>
-                                    <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-                              </form>
+                              </div>
                         </div>
                         <div class="navbar-customized ml-md-0 ml-auto mr-6" id="navbarSupportedContent">
                               <ul class="navbar-nav">
@@ -91,6 +109,9 @@ include_once './session.php';
                               </ul>
                         </div>
                   </nav>
+            </div>
+            <div id="show_up" class=" mt-5 pt-5">
+
             </div>
             <?php
             if (isAdmin()) {

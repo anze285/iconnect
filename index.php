@@ -6,10 +6,10 @@ include_once './database.php';
 <div class="d-flex justify-content-center custom-index-div">
     <div class="">
         <?php
-        $query = "SELECT u.id AS id, u.username AS username, p.description AS description, i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id
-        INNER JOIN followers f ON u.id = f.user_id ORDER BY p.date DESC";
+        $query = "SELECT DISTINCT u.id AS id, u.username AS username, p.description AS description, i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id
+        INNER JOIN followers f ON u.id = f.user_id WHERE f.follower_id = ? OR f.user_id = ? ORDER BY p.date DESC";
         $stmt = $pdo->prepare($query);
-        $stmt->execute();
+        $stmt->execute([$_SESSION['user_id'], $_SESSION['user_id']]);
         while ($post = $stmt->fetch()) {
         ?>
             <div class="bg-white my-5 border">

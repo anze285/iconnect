@@ -16,7 +16,7 @@ if (!empty($name) && !empty($email)
     && ($pass1 == $pass2)) {
     $pass = password_hash($pass1, PASSWORD_DEFAULT);
 
-    $query = "SELECT email, username FROM users";
+    $query = "SELECT id, email, username FROM users";
     $stmt = $pdo->prepare($query);
     $stmt->execute();
     $verification = true;
@@ -38,8 +38,13 @@ if (!empty($name) && !empty($email)
         . "VALUES (?,?,?,?,?)";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$name, $username, $email, $phone, $pass]);
-        $_SESSION['register_successful'] = "Account was successfully created.";
-        header("Location: login.php");
+
+        $query = "SELECT id FROM users WHERE email = ? AND username = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$email, $username]);
+        $user = $stmt->fetch();
+        $_SESSION['user_id'] = $user['id'];
+        header("Location: index.php");
     }
     else {
         header("Location: registration.php");

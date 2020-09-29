@@ -11,7 +11,7 @@ include_once './database.php';
         <div class="col ml-4 my-auto">
             <div>
                 <?php
-                $query = "SELECT name, username FROM users WHERE id = ?";
+                $query = "SELECT name, username, bio FROM users WHERE id = ?";
                 $stmt = $pdo->prepare($query);
                 $stmt->execute([$_SESSION['user_id']]);
                 $user = $stmt->fetch();
@@ -47,7 +47,10 @@ include_once './database.php';
             </div>
         </div>
     </div>
-    <hr>
+    <div class="mt-3">
+        <p class=" fs-2"><?php echo $user['bio']; ?></p>
+    </div>
+    <hr class="mt-0">
     <div>
         <div class="container">
             <div class='row row-cols-1 row-cols-md-2 row-cols-lg-3'>
