@@ -49,9 +49,29 @@ if (
         // if everything is ok, try to upload file
     } 
     else {
-        $query = "INSERT INTO posts (description, user_id, date) VALUES (?,?,CURRENT_TIMESTAMP())";
+        if (!empty($destination)) {
+            $query = "SELECT * FROM locations WHERE title = ?";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([$destination]);
+            $count = $stmt->rowCount();
+            $loc = $stmt->fetch();
+            if ($count == 0) {
+                $query = "INSERT INTO locations(title) VALUES(?)";
+                $stmt = $pdo->prepare($query);
+                $stmt->execute([$destination]);
+
+                $query = "SELECT * FROM locations WHERE title = ?";
+                $stmt = $pdo->prepare($query);
+                $stmt->execute([$destination]);
+                $loc = $stmt->fetch();
+                $loc_id = $loc['id'];
+            } else {
+                $loc_id = $loc['id'];
+            }
+        }
+        $query = "INSERT INTO posts (description, user_id, date,location_id) VALUES (?,?,CURRENT_TIMESTAMP(),?)";
         $stmt = $pdo->prepare($query);
-        $stmt->execute([$description, $_SESSION['user_id']]);
+        $stmt->execute([$description, $_SESSION['user_id'],$loc_id]);
 
         $query = "SELECT id FROM posts WHERE user_id=? ORDER BY id DESC LIMIT 1";
         $stmt = $pdo->prepare($query);
@@ -68,9 +88,8 @@ if (
             echo "Sorry, there was an error uploading your file.";
         }
     }
-
-    //header("Location: login.php");
 } else {
-    //header("Location: registration.php");
+    
 }
+header("Location: profile.php");
 ?>

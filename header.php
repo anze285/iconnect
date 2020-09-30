@@ -81,9 +81,6 @@ include_once './session.php';
                                           <a class="nav-link" href="index.php"><span class="flaticon-home"></span></a>
                                     </li>
                                     <li class="nav-item">
-                                          <a class="nav-link" href="#"><span class="flaticon-compass"></span></a>
-                                    </li>
-                                    <li class="nav-item">
                                           <a class="nav-link" href="#"><span class="flaticon-compass-1"></span></a>
                                     </li>
                                     <li class="nav-item">

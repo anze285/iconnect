@@ -27,6 +27,34 @@ $user = $stmt->fetch();
 
                 <span class="fs-3 font-weight-100 align-middle"><?php echo $user['username']; ?></span>
                 <a href="edit_profile.php" class="ml-4 btn btn-outline-dark btn-sm align-bottom mb-1 px-3">Edit profile</a>
+                <!-- Button trigger modal -->
+                <a type="button" class="btn btn-outline-dark btn-sm align-bottom mb-1 px-3 ml-2" data-toggle="modal" data-target="#exampleModalCenter">
+                    New post
+                </a>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">New post</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form action="new_post.php" method="post" enctype="multipart/form-data">
+                                <div class="modal-body">
+                                    <input type="file" required="required" name="fileToUpload" accept="image/*">
+                                    <input type=" text" placeholder="Description" name="description">
+                                    <input type="text" placeholder="Destination" name="destination">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary" name="post">Publish post</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="my-2">
                 <?php
@@ -64,7 +92,7 @@ $user = $stmt->fetch();
         <div class="container">
             <div class='row row-cols-1 row-cols-md-2 row-cols-lg-3'>
                 <?php
-                $query = "SELECT DISTINCT i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id WHERE u.id = ?";
+                $query = "SELECT DISTINCT i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id WHERE u.id = ? ORDER BY p.date DESC";
                 $stmt = $pdo->prepare($query);
                 $stmt->execute([$_SESSION['user_id']]);
                 while ($post = $stmt->fetch()) {

@@ -10,6 +10,12 @@ include_once './database.php';
         INNER JOIN followers f ON u.id = f.user_id WHERE f.follower_id = ? OR f.user_id = ? ORDER BY p.date DESC";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$_SESSION['user_id'], $_SESSION['user_id']]);
+        if ($stmt->rowCount() == 0) {
+            $query = "SELECT DISTINCT u.profile_pic AS profile_pic, u.id AS id, u.username AS username, p.description AS description, i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id
+            INNER JOIN followers f ON u.id = f.user_id ORDER BY RAND() LIMIT 1";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute();
+        }
         while ($post = $stmt->fetch()) {
         ?>
             <div class="bg-white my-5 border">

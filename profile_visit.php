@@ -77,7 +77,7 @@ $user = $stmt->fetch();
         <div class="container">
             <div class='row row-cols-1 row-cols-md-2 row-cols-lg-3'>
                 <?php
-                $query = "SELECT DISTINCT i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id WHERE u.id = ?";
+                $query = "SELECT DISTINCT i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id WHERE u.id = ? ORDER BY p.date DESC";
                 $stmt = $pdo->prepare($query);
                 $stmt->execute([$_SESSION['profile_id']]);
                 while ($post = $stmt->fetch()) {
