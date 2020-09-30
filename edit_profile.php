@@ -2,7 +2,7 @@
 include_once './header.php';
 include_once './database.php';
 
-$query = "SELECT name, username, email, bio, phone_number FROM users WHERE id = ?";
+$query = "SELECT name, username, email, bio, phone_number, profile_pic FROM users WHERE id = ?";
 $stmt = $pdo->prepare($query);
 $stmt->execute([$_SESSION['user_id']]);
 $user = $stmt->fetch();
@@ -11,8 +11,43 @@ $user = $stmt->fetch();
 <div class="password-main mt-5 mb-4">
     <div class="password-content">
         <div class="d-flex justify-content-center mb-4">
-            <img class="custom-img mr-3" src="images/profile.png" alt="profile-pic">
-            <h4 class="font-weight-normal my-auto"><?php echo $user['username']; ?></h4>
+            <?php
+            if (!empty($user['profile_pic'])) {
+            ?>
+                <img class="custom-img mr-3" src="<?php echo $user['profile_pic']; ?>" alt="profile-pic">
+            <?php
+            } else {
+            ?>
+                <img class="custom-img mr-3" src="images/profile.png" alt="profile-pic">
+            <?php
+            }
+            ?>
+            <div class="text-left">
+                <h4 class="font-weight-normal my-auto"><?php echo $user['username']; ?></h4>
+                <span class="fs-5 font-weight-600 sign-a" type="button" data-toggle="modal" data-target="#changeprofilepic">Change Profile Photo</span>
+
+                <div class="modal fade" id="changeprofilepic" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="ModalCenterTitle">Change profile Photo</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form action="upload_pic.php" method="post" enctype="multipart/form-data">
+                                <div class="modal-body">
+                                    <input class="" type="file" id="file" required="required" name="fileToUpload" accept="image/*">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary" name="picture">Save changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <form action="update_profile.php" method="post">
             <div class="form-group row">
@@ -49,10 +84,10 @@ $user = $stmt->fetch();
             unset($_SESSION['profile_changed']);
             unset($_SESSION['profile_error']);
             ?>
-            <div class="w-75 ml-5 pl-4">
-                <input type="submit" class="btn btn-primary w-35 mb-2 fs-1 mt-0 font-weight-bolder bg-0095F6 p-1 first-button fs-2 ml-md-4" value="Submit" />
-                <a class="btn btn-primary w-60 mb-2 fs-1 mt-0 font-weight-bolder bg-0095F6 p-1 first-button fs-2" href="password.php">Change password</a>
+            <div class="w-100">
+                <input type="submit" class="btn btn-primary w-35 mb-2 fs-1 mt-0 font-weight-bolder bg-0095F6 p-1 first-button fs-2" value="Submit" />
             </div>
+            <a class="fs-1 c-00376B" href="password.php">Change password</a>
         </form>
     </div>
 </div>

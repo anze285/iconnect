@@ -9,6 +9,7 @@ $username = $_POST['username'];
 //$birthday = $_POST['birthday'];
 $pass1 = $_POST['pass1'];
 $pass2 = $_POST['pass2'];
+$username = str_replace(' ', '_', $username);
 //preverim podatke, da so obvezi vnešeni
 
 if (!empty($name) && !empty($email) 

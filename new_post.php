@@ -7,7 +7,7 @@ $destination = $_POST['destination'];
 //preverim podatke, da so obvezi vnešeni
 
 if (
-    !empty($description) && !empty($destination)
+    true
 ) {
     $query = "SELECT * FROM images i INNER JOIN posts p ON p.id=i.post_id WHERE p.user_id =?";
     $stmt = $pdo->prepare($query);
@@ -18,10 +18,10 @@ if (
     $ext = end($tmp);
     $name = $_SESSION['user_id']."-".$count . "." . $ext;
     $target_file = $target_dir . basename($name);
-    $uploadOk = 1;
+    $uploadOk = 0;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
     // Check if image file is a actual image or fake image
-    if (isset($_POST["submit"])) {
+    if (isset($_POST["post"])) {
         $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
         if ($check !== false) {
             echo "File is an image - " . $check["mime"] . ".";
@@ -47,7 +47,8 @@ if (
     if ($uploadOk == 0) {
         echo "Sorry, your file was not uploaded.";
         // if everything is ok, try to upload file
-    } else {
+    } 
+    else {
         $query = "INSERT INTO posts (description, user_id, date) VALUES (?,?,CURRENT_TIMESTAMP())";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$description, $_SESSION['user_id']]);

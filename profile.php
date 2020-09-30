@@ -1,25 +1,34 @@
 <?php
 include_once './header.php';
 include_once './database.php';
-?>
 
+$query = "SELECT name, username, bio, profile_pic FROM users WHERE id = ?";
+$stmt = $pdo->prepare($query);
+$stmt->execute([$_SESSION['user_id']]);
+$user = $stmt->fetch();
+?>
 <div class="container-fluid mt-5 pt-md-4 w-custom">
-    <div class="row justify-content-md-center px-5 pt-2 pb-3">
+    <div class="row justify-content-md-center px-5 pt-2">
         <div class="col-auto justify-content-center px-5">
-            <img class="custom-img2" src="images/profile.png" alt="profile-pic">
+            <?php
+            if (!empty($user['profile_pic'])) {
+            ?>
+                <img class="custom-img2 mr-3" src="<?php echo $user['profile_pic']; ?>" alt="profile-pic">
+            <?php
+            } else {
+            ?>
+                <img class="custom-img2 mr-3" src="images/profile.png" alt="profile-pic">
+            <?php
+            }
+            ?>
         </div>
         <div class="col ml-4 my-auto">
             <div>
-                <?php
-                $query = "SELECT name, username, bio FROM users WHERE id = ?";
-                $stmt = $pdo->prepare($query);
-                $stmt->execute([$_SESSION['user_id']]);
-                $user = $stmt->fetch();
-                ?>
+
                 <span class="fs-3 font-weight-100 align-middle"><?php echo $user['username']; ?></span>
                 <a href="edit_profile.php" class="ml-4 btn btn-outline-dark btn-sm align-bottom mb-1 px-3">Edit profile</a>
             </div>
-            <div class="my-3">
+            <div class="my-2">
                 <?php
                 $query = "SELECT COUNT(*) AS count FROM posts WHERE user_id = ?";
                 $stmt = $pdo->prepare($query);
@@ -45,17 +54,17 @@ include_once './database.php';
             <div>
                 <span class="font-weight-600"><?php echo $user['name']; ?></span>
             </div>
+            <div class="mt-1">
+                <p class=" fs-2"><?php echo $user['bio']; ?></p>
+            </div>
         </div>
     </div>
-    <div class="mt-3">
-        <p class=" fs-2"><?php echo $user['bio']; ?></p>
-    </div>
-    <hr class="mt-0">
+    <hr>
     <div>
         <div class="container">
             <div class='row row-cols-1 row-cols-md-2 row-cols-lg-3'>
                 <?php
-                $query = "SELECT i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id WHERE u.id = ?";
+                $query = "SELECT DISTINCT i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id WHERE u.id = ?";
                 $stmt = $pdo->prepare($query);
                 $stmt->execute([$_SESSION['user_id']]);
                 while ($post = $stmt->fetch()) {

@@ -2,7 +2,7 @@
 include_once './header.php';
 include_once './database.php';
 
-$query = "SELECT username FROM users WHERE id = ?";
+$query = "SELECT username, profile_pic FROM users WHERE id = ?";
 $stmt = $pdo->prepare($query);
 $stmt->execute([$_SESSION['user_id']]);
 $user = $stmt->fetch();
@@ -11,7 +11,17 @@ $user = $stmt->fetch();
 <div class="password-main mt-5 mb-4">
     <div class="password-content">
         <div class="d-flex justify-content-center mb-4">
-            <img class="custom-img mr-3" src="images/profile.png" alt="profile-pic">
+            <?php
+            if (!empty($user['profile_pic'])) {
+            ?>
+                <img class="custom-img mr-3" src="<?php echo $user['profile_pic']; ?>" alt="profile-pic">
+            <?php
+            } else {
+            ?>
+                <img class="custom-img mr-3" src="images/profile.png" alt="profile-pic">
+            <?php
+            }
+            ?>
             <h4 class="font-weight-normal my-auto"><?php echo $user['username']; ?></h4>
         </div>
         <form action="change_password.php" method="post">

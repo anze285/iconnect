@@ -67,16 +67,22 @@ textarea{
     margin-top: 55px;
 }
 .custom-img{
+    min-width: 60px;
+    min-height: 60px;
     max-width: 60px;
     max-height: 60px;
     border-radius: 100%;
 }
 .custom-img1 {
+    min-width: 40px;
+    min-height: 40px;
     max-width: 40px;
     max-height: 40px;
     border-radius: 100%;
 }
 .custom-img2 {
+    min-width: 150px;
+    min-height: 150px;
     max-width: 150px;
     max-height: 150px;
     border-radius: 100%;

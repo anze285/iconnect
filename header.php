@@ -12,7 +12,10 @@ include_once './session.php';
       <meta name="author" content="">
 
       <title>Instantgram</title>
-
+      
+      <!--Chose file-->
+      <link href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/wtf-forms.css" rel="stylesheet">
+      
       <!-- Flaticon -->
       <link rel="stylesheet" type="text/css" href="css/flaticon.css">
 
