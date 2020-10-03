@@ -96,11 +96,12 @@ $user = $stmt->fetch();
                 $query = "SELECT DISTINCT i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id WHERE u.id = ? ORDER BY p.date DESC";
                 $stmt = $pdo->prepare($query);
                 $stmt->execute([$_SESSION['user_id']]);
-                while ($post = $stmt->fetch()) {
+                $count = $stmt->rowCount();
+                for ($i = 0; $post = $stmt->fetch(); $i++) {
 
                 ?>
                     <div class="col mb-4">
-                        <img class="img-fluid img-strech" src="<?php echo $post['root']; ?>" alt="post-pic">
+                        <img class="img-fluid img-strech" src="<?php echo $post['root']; ?>" alt="post-pic" type="button" data-toggle="modal" data-target="#exampleModal">
                     </div>
 
                 <?php
@@ -110,7 +111,62 @@ $user = $stmt->fetch();
             </div>
 
         </div>
-
         <?php
-        include_once './footer.php';
+        for ($i = 0; $i < $count; $i++) {
+            echo '<div class="modal fade mx-auto" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="Modal' . $i . '" aria-hidden="true">'
         ?>
+            <div class="modal-dialog modal-dialog-centered justify-content-center" role="document">
+                <div class="modal-content w-model">
+                    <div class="modal-body w-model p-0">
+                        <div class="column w-model">
+                            <div class="row h-auto">
+                                <div class="d-none d-670-block col-8 pr-0">
+                                    <img class="img-fluid img-cover" src="images/2-0.jpg">
+                                </div>
+                                <div class="col-4 pl-0">
+                                    <div class="">
+                                        <div class="my-2 mx-3">
+                                            <img class="custom-img1 mr-3" src="images/profile.png" alt="profile-pic">
+                                            <span class="font-weight-bolder fs-2 mt-1">Marcel_matko_sotosek</span>
+                                        </div>
+                                        <hr>
+                                        <div id="wraper" class="pr-1">
+                                            <div class="scrollbar" id="style-3">
+                                                <div class="force-overflow">
+                                                    <div class="mx-3">
+                                                        <img class="mb-1 custom-img1 mr-3" src="images/profile.png" alt="profile-pic">
+                                                        <span class="font-weight-bolder fs-2 mt-1">Marcel_matko_sotosek</span>
+                                                        <p class="ml-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis illum odit deleniti! Aliquam similique sint ipsam cupiditate sapiente, explicabo et numquam molestias nobis consectetur maxime, debitis mollitia! Velit, rerum assumenda!</p>
+                                                    </div>
+                                                    <div class="mx-3">
+                                                        <img class="mb-1 custom-img1 mr-3" src="images/profile.png" alt="profile-pic">
+                                                        <span class="font-weight-bolder fs-2 mt-1">Marcel_matko_sotosek</span>
+                                                        <p class="ml-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis rerum quibusdam eligendi adipisci inventore? Accusantium nulla reprehenderit maxime deleniti cupiditate, incidunt odit quos nihil voluptatem a aliquid voluptates quae. Nisi.</p>
+                                                    </div>
+                                                    <div class="mx-3">
+                                                        <img class="custom-img1 mr-3" src="images/profile.png" alt="profile-pic">
+                                                        <span class="font-weight-bolder fs-2 mt-1">Marcel_matko_sotosek</span>
+                                                        <p class="ml-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt ad harum saepe beatae ipsum quia, vero non labore magni ipsam quidem odio iste soluta laboriosam! Doloremque tempora non quia fuga!</p>
+                                                    </div>
+                                                    <div class="mx-3">
+                                                        <img class="custom-img1 mr-3" src="images/profile.png" alt="profile-pic">
+                                                        <span class="font-weight-bolder fs-2 mt-1">Marcel_matko_sotosek</span>
+                                                        <p class="ml-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore vitae magni nisi neque obcaecati laudantium eaque vero quia recusandae nobis, labore iusto quod quaerat aliquid ex, culpa esse accusantium laboriosam!</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+<?php
+        }
+?>
+<?php
+include_once './footer.php';
+?>

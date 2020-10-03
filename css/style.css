@@ -35,12 +35,47 @@ textarea{
 .fs-4{
     font-size: 0.6rem;
 }
+.img-cover{
+    object-fit: cover;
+}
+
 .w-custom{
     width: 70% !important;
 }
 @media only screen and (max-width: 1200px) {
     .w-custom {
         width: 100% !important;
+    }
+}
+@media only screen and (min-width: 670px) {
+    .d-670-block{
+        display: block !important;
+    }
+    .h-auto {
+        height: 400px !important;
+    }
+
+    .w-model {
+        height: 400px;
+        width: 666px !important;
+    }
+
+    .img-cover {
+        height: 398px;
+    }
+}
+@media only screen and (min-width: 1200px) {
+    .h-auto {
+        height: 600px !important;
+    }
+
+    .w-model {
+        height: 600px;
+        width: 1000px !important;
+    }
+
+    .img-cover {
+        height: 598px;
     }
 }
 .bg-fafafa{
@@ -248,3 +283,32 @@ textarea{
     text-transform: uppercase;
     text-align: center;
 }
+/* SCROLLBAR */
+.scrollbar {
+    float: left;
+    height: 300px;
+    overflow-y: scroll;
+    width: inherit;
+}
+#wrapper
+{
+	text-align: center;
+	width: 500px;
+	margin: auto;
+}
+.force-overflow {
+    min-height: 450px;
+}
+
+#style-3::-webkit-scrollbar {
+    width: 5px;
+}
+
+#style-3::-webkit-scrollbar-thumb {
+    background-color: #aaaaaa;
+}
+/*.overflow-custom-auto {
+    overflow: hidden;
+    overflow: auto;
+    height: 300px !important;
+}*/
