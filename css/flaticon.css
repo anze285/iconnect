@@ -43,5 +43,9 @@
 .flaticon-compass:before { content: "\f101"; }
 .flaticon-compass-1:before { content: "\f102"; }
 .flaticon-heart:before { content: "\f103"; }
+.flaticon-heart1:before {
+  content: "\f103";
+  color: red;;
+}
 .flaticon-user:before { content: "\f104"; }
 .flaticon-search:before { content: "\f105"; }

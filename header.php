@@ -11,7 +11,7 @@ include_once './session.php';
       <meta name="description" content="">
       <meta name="author" content="">
 
-      <title>Instantgram</title>
+      <title>iConnect</title>
       
       <!--Chose file-->
       <link href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/wtf-forms.css" rel="stylesheet">
@@ -65,7 +65,7 @@ include_once './session.php';
             <div class="bg-white navbar-custom fixed-top">
                   <nav class="navbar navbar-expand-sm navbar-light bg-light bg-white py-0">
                         <div class="ml-6">
-                              <a class="navbar-brand instantgram fs-3" href="index.php">Instantgram</a>
+                              <a class="navbar-brand instantgram fs-3" href="index.php">iConnect</a>
                         </div>
                         <div class="d-none d-md-block mx-auto">
                               <div class="form-inline my-2">

@@ -3,7 +3,7 @@ include_once './header.php';
 ?>
 <div class="login-main m-4 p-4">
     <div class="login-content">
-        <h1 class="instantgram pb-4 mb-4 big-text">Instantgram</h1>
+        <h1 class="instantgram pb-4 mb-4 big-text">iConnect</h1>
 
         <form action="login_check.php" method="post">
             <input id="login-email" type="text" name="email" class="form-control mb-1 w-75 mx-auto border bg-fafafa fs-1 py-2" placeholder="Username or email" required="required" />
