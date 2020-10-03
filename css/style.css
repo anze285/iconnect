@@ -1,4 +1,4 @@
-body{
+body {
     background-color: #fafafa;
 }
 a:hover{
@@ -22,6 +22,13 @@ textarea{
     width: 52%;
 }
 /*INDEX*/
+.comment{
+    margin: 0 auto !important;
+    width: 99%;
+    border: none;
+    resize: none;
+    height: 100px;
+}
 .btn-google {
     color: white !important;
     background-color: #ea4335 !important;
@@ -47,7 +54,10 @@ textarea{
         width: 100% !important;
     }
 }
-@media only screen and (min-width: 670px) {
+@media only screen and (min-width: 768px) {
+    .scrollbar {
+        height: 150px !important;
+    }
     .d-670-block{
         display: block !important;
     }
@@ -68,7 +78,9 @@ textarea{
     .h-auto {
         height: 600px !important;
     }
-
+    .scrollbar {
+        height: 300px !important;
+    }
     .w-model {
         height: 600px;
         width: 1000px !important;
@@ -307,8 +319,3 @@ textarea{
 #style-3::-webkit-scrollbar-thumb {
     background-color: #aaaaaa;
 }
-/*.overflow-custom-auto {
-    overflow: hidden;
-    overflow: auto;
-    height: 300px !important;
-}*/

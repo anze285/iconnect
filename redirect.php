@@ -5,7 +5,7 @@ include_once 'database.php';
 // init configuration
 $clientID = '2234109466-51ilt55571258irkff213j3rorm3g9r2.apps.googleusercontent.com';
 $clientSecret = 'blwf1pkQYOdX0w4O-3ayvAha';
-$redirectUri = 'http://localhost/instantgram/redirect.php';
+$redirectUri = 'https://iconnect.gorsek.si/redirect.php';
   
 // create Client Request to access Google API
 $client = new Google_Client();

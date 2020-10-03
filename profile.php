@@ -101,7 +101,7 @@ $user = $stmt->fetch();
 
                 ?>
                     <div class="col mb-4">
-                        <img class="img-fluid img-strech" src="<?php echo $post['root']; ?>" alt="post-pic" type="button" data-toggle="modal" data-target="#exampleModal">
+                        <img class="img-fluid img-strech" src="<?php echo $post['root']; ?>" alt="post-pic" type="button" data-toggle="modal" data-target="#postmodal<?php echo $i; ?>">
                     </div>
 
                 <?php
@@ -112,8 +112,11 @@ $user = $stmt->fetch();
 
         </div>
         <?php
-        for ($i = 0; $i < $count; $i++) {
-            echo '<div class="modal fade mx-auto" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="Modal' . $i . '" aria-hidden="true">'
+        $query = "SELECT DISTINCT p.id AS post_id, i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id WHERE u.id = ? ORDER BY p.date DESC";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$_SESSION['user_id']]);
+        for ($i = 0; $post = $stmt->fetch(); $i++) {
+            echo '<div class="modal fade mx-auto" id="postmodal' . $i . '" tabindex="-1" role="dialog" aria-hidden="true">'
         ?>
             <div class="modal-dialog modal-dialog-centered justify-content-center" role="document">
                 <div class="modal-content w-model">
@@ -121,13 +124,23 @@ $user = $stmt->fetch();
                         <div class="column w-model">
                             <div class="row h-auto">
                                 <div class="d-none d-670-block col-8 pr-0">
-                                    <img class="img-fluid img-cover" src="images/2-0.jpg">
+                                    <img class="img-fluid img-cover" src="<?php echo $post['root']; ?>">
                                 </div>
-                                <div class="col-4 pl-0">
+                                <div class="col col-md-4">
                                     <div class="">
                                         <div class="my-2 mx-3">
-                                            <img class="custom-img1 mr-3" src="images/profile.png" alt="profile-pic">
-                                            <span class="font-weight-bolder fs-2 mt-1">Marcel_matko_sotosek</span>
+                                            <?php
+                                            if (!empty($user['profile_pic'])) {
+                                            ?>
+                                                <img class="custom-img1 mr-3" src="<?php echo $user['profile_pic']; ?>" alt="profile-pic">
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <img class="custom-img1 mr-3" src="images/profile.png" alt="profile-pic">
+                                            <?php
+                                            }
+                                            ?>
+                                            <span class="font-weight-bolder fs-2 mt-1"><?php echo $user['username']; ?></span>
                                         </div>
                                         <hr>
                                         <div id="wraper" class="pr-1">
@@ -155,6 +168,51 @@ $user = $stmt->fetch();
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <hr>
+                                        <div>
+                                            <div class="float-left">
+                                                <form action="like.php" method="POST">
+                                                    <?php
+                                                    $query1 = "SELECT * FROM likes WHERE post_id = ? AND user_id = ?";
+                                                    $stmt1 = $pdo->prepare($query1);
+                                                    $stmt1->execute([$post['post_id'], $_SESSION['user_id']]);
+                                                    if ($stmt1->rowCount() == 0) {
+                                                        echo '<span data-content_id="' . $post['post_id'] . '" role="button" class="like"><span class="flaticon-heart"></span></span>';
+                                                    } else {
+                                                        echo '<span data-content_id="' . $post['post_id'] . '" role="button" class="like"><span class="flaticon-heart1"></span></span>';
+                                                    }
+                                                    ?>
+                                                </form>
+                                            </div>
+                                            <div class="float-right mr-2">
+                                                <form action="save.php" method="POST">
+                                                    <?php
+                                                    $query1 = "SELECT * FROM saved_posts WHERE post_id = ? AND user_id = ?";
+                                                    $stmt1 = $pdo->prepare($query1);
+                                                    $stmt1->execute([$post['post_id'], $_SESSION['user_id']]);
+                                                    if ($stmt1->rowCount() == 0) {
+                                                        echo '<span data-content_id="' . $post['post_id'] . '" class="mr-2 fs-2 font-weight-600 sign-a save" role="button">Save</span>';
+                                                    } else {
+                                                        echo '<span data-content_id="' . $post['post_id'] . '" class="mr-2 fs-2 font-weight-600 sign-a save" role="button">Saved</span>';
+                                                    }
+                                                    ?>
+                                                </form>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="mx-4 mt-3">
+                                                <?php
+                                                $query1 = "SELECT * FROM likes WHERE post_id = ?";
+                                                $stmt1 = $pdo->prepare($query1);
+                                                $stmt1->execute([$post['post_id']]);
+                                                $likes = $stmt1->rowCount();
+                                                ?>
+                                                <p class="fs-5 mb-2">Liked by <span class="font-weight-bolder" id="likes<?php echo $post['post_id']; ?>"><?php echo $likes; ?></span></p>
+                                            </div>
+                                            <div>
+                                                <textarea name="comment" class="comment border-top px-2 pt-2" placeholder="Add a comment ..."></textarea>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -164,6 +222,7 @@ $user = $stmt->fetch();
                 </div>
             </div>
     </div>
+    
 <?php
         }
 ?>

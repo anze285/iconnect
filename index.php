@@ -1,6 +1,8 @@
 <?php
 include_once './header.php';
 include_once './database.php';
+$shownposts = array();
+$j = 0
 ?>
 
 <div class="d-flex justify-content-center custom-index-div">
@@ -16,9 +18,10 @@ include_once './database.php';
             $stmt = $pdo->prepare($query);
             $stmt->execute([$_SESSION['user_id']]);
         }
-        for ($i = 0; $post = $stmt->fetch(); $i++) {
+        for (; $post = $stmt->fetch(); $j++) {
+            $shownposts[$j] = $post['post_id'];
         ?>
-            <div class="bg-white my-5 border" id="<?php echo 'p' . $i; ?>">
+            <div class="bg-white my-5 border">
                 <form action="profile_session.php" method="POST">
                     <div class="m-2 align-middle" role="button" onclick="this.parentNode.submit();">
                         <input type=" number" name="id" value="<?php echo $post['id']; ?>" hidden>
@@ -42,32 +45,28 @@ include_once './database.php';
                 <div class="mt-2">
                     <div class="float-left">
                         <form action="like.php" method="POST">
-                            <input type="text" value="<?php echo 'p' . $i; ?>" hidden name="redirect">
-                            <input type="number" value="<?php echo $post['post_id']; ?>" hidden name="post_id">
                             <?php
                             $query1 = "SELECT * FROM likes WHERE post_id = ? AND user_id = ?";
                             $stmt1 = $pdo->prepare($query1);
                             $stmt1->execute([$post['post_id'], $_SESSION['user_id']]);
                             if ($stmt1->rowCount() == 0) {
-                                echo '<span role="button" onclick="this.parentNode.submit();" class="flaticon-heart"></span>';
+                                echo '<span data-content_id="' . $post['post_id'] . '" role="button" class="like"><span class="flaticon-heart"></span></span>';
                             } else {
-                                echo '<span role="button" onclick="this.parentNode.submit();" class="flaticon-heart1"></span>';
+                                echo '<span data-content_id="' . $post['post_id'] . '" role="button" class="like"><span class="flaticon-heart1"></span></span>';
                             }
                             ?>
                         </form>
                     </div>
                     <div class="float-right mr-2">
                         <form action="save.php" method="POST">
-                            <input type="text" value="<?php echo 'p' . $i; ?>" hidden name="redirect">
-                            <input type="number" value="<?php echo $post['post_id']; ?>" hidden name="post_id">
                             <?php
                             $query1 = "SELECT * FROM saved_posts WHERE post_id = ? AND user_id = ?";
                             $stmt1 = $pdo->prepare($query1);
                             $stmt1->execute([$post['post_id'], $_SESSION['user_id']]);
                             if ($stmt1->rowCount() == 0) {
-                                echo '<span class="mr-2 fs-2 font-weight-600 sign-a" role="button" onclick="this.parentNode.submit();">Save</span>';
+                                echo '<span data-content_id="' . $post['post_id'] . '" class="mr-2 fs-2 font-weight-600 sign-a save" role="button">Save</span>';
                             } else {
-                                echo '<span class="mr-2 fs-2 font-weight-600 sign-a" role="button" onclick="this.parentNode.submit();">Saved</span>';
+                                echo '<span data-content_id="' . $post['post_id'] . '" class="mr-2 fs-2 font-weight-600 sign-a save" role="button">Saved</span>';
                             }
                             ?>
                         </form>
@@ -81,13 +80,13 @@ include_once './database.php';
                     $stmt1->execute([$post['post_id']]);
                     $likes = $stmt1->rowCount();
                     ?>
-                    <p class="fs-1 mb-2">Liked by <span class="font-weight-bolder"><?php echo $likes ?></span></p>
+                    <p class="fs-1 mb-2">Liked by <span class="font-weight-bolder" id="likes<?php echo $post['post_id']; ?>"><?php echo $likes ?></span></p>
                 </div>
                 <div class="ml-4">
                     <p class="fs-1 mb-1"><span class="font-weight-bolder">anze_gorsek</span> Sprostitev po šoli</p>
                 </div>
                 <div class="ml-4">
-                    <p class="fs-2 mb-1 text-black-50">View all <span>21</span> comments</p>
+                    <p type="button" data-toggle="modal" data-target="#postmodal<?php echo $j; ?>" class="fs-2 mb-1 text-black-50">View all <span>21</span> comments</p>
                 </div>
                 <div class="ml-4">
                     <p class="fs-1 mb-1"><span class="font-weight-bolder">user-404</span> Res lep sladoled</p>
@@ -171,6 +170,125 @@ include_once './database.php';
         </div>
     </div>
 </div>
+<?php
+for ($i = 0; $i < $j; $i++) {
+    $query = "SELECT DISTINCT u.id AS user_id, u.profile_pic AS profile_pic, u.username AS username, p.id AS post_id, i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id WHERE p.id = ? ORDER BY p.date DESC";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$shownposts[$i]]);
+    $post = $stmt->fetch();
+    echo '<div class="modal fade mx-auto" id="postmodal' . $i . '" tabindex="-1" role="dialog" aria-hidden="true">'
+?>
+    <div class="modal-dialog modal-dialog-centered justify-content-center" role="document">
+        <div class="modal-content w-model p-2">
+            <div class="modal-body w-model p-0">
+                <div class="column w-model">
+                    <div class="row h-auto">
+                        <div class="d-none d-670-block col-8 pr-0">
+                            <img class="img-fluid img-cover" src="<?php echo $post['root']; ?>">
+                        </div>
+                        <div class="col col-md-4 pl-0">
+                            <div class="">
+                                <form action="profile_session.php" method="POST">
+                                    <input type="number" name="id" value="<?php echo $post['user_id']; ?>" hidden>
+                                    <div class="my-2 mx-3" role="button" onclick="this.parentNode.submit();">
+                                        <?php
+                                        if (!empty($post['profile_pic'])) {
+                                        ?>
+                                            <img class="custom-img1 mr-3" src="<?php echo $post['profile_pic']; ?>" alt="profile-pic">
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <img class="custom-img1 mr-3" src="images/profile.png" alt="profile-pic">
+                                        <?php
+                                        }
+                                        ?>
+                                        <span class="font-weight-bolder fs-2 mt-1"><?php echo $post['username']; ?></span>
+                                    </div>
+                                </form>
+                                <hr>
+                                <div id="wraper" class="pr-1">
+                                    <div class="scrollbar" id="style-3">
+                                        <div class="force-overflow">
+                                            <div class="mx-3">
+                                                <img class="mb-1 custom-img1 mr-3" src="images/profile.png" alt="profile-pic">
+                                                <span class="font-weight-bolder fs-2 mt-1">Marcel_matko_sotosek</span>
+                                                <p class="ml-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis illum odit deleniti! Aliquam similique sint ipsam cupiditate sapiente, explicabo et numquam molestias nobis consectetur maxime, debitis mollitia! Velit, rerum assumenda!</p>
+                                            </div>
+                                            <div class="mx-3">
+                                                <img class="mb-1 custom-img1 mr-3" src="images/profile.png" alt="profile-pic">
+                                                <span class="font-weight-bolder fs-2 mt-1">Marcel_matko_sotosek</span>
+                                                <p class="ml-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis rerum quibusdam eligendi adipisci inventore? Accusantium nulla reprehenderit maxime deleniti cupiditate, incidunt odit quos nihil voluptatem a aliquid voluptates quae. Nisi.</p>
+                                            </div>
+                                            <div class="mx-3">
+                                                <img class="custom-img1 mr-3" src="images/profile.png" alt="profile-pic">
+                                                <span class="font-weight-bolder fs-2 mt-1">Marcel_matko_sotosek</span>
+                                                <p class="ml-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt ad harum saepe beatae ipsum quia, vero non labore magni ipsam quidem odio iste soluta laboriosam! Doloremque tempora non quia fuga!</p>
+                                            </div>
+                                            <div class="mx-3">
+                                                <img class="custom-img1 mr-3" src="images/profile.png" alt="profile-pic">
+                                                <span class="font-weight-bolder fs-2 mt-1">Marcel_matko_sotosek</span>
+                                                <p class="ml-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore vitae magni nisi neque obcaecati laudantium eaque vero quia recusandae nobis, labore iusto quod quaerat aliquid ex, culpa esse accusantium laboriosam!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <hr>
+                                <div>
+                                    <div class="float-left">
+                                        <form action="like.php" method="POST">
+                                            <?php
+                                            $query1 = "SELECT * FROM likes WHERE post_id = ? AND user_id = ?";
+                                            $stmt1 = $pdo->prepare($query1);
+                                            $stmt1->execute([$post['post_id'], $_SESSION['user_id']]);
+                                            if ($stmt1->rowCount() == 0) {
+                                                echo '<span data-content_id="' . $post['post_id'] . '" role="button" class="like"><span class="flaticon-heart"></span></span>';
+                                            } else {
+                                                echo '<span data-content_id="' . $post['post_id'] . '" role="button" class="like"><span class="flaticon-heart1"></span></span>';
+                                            }
+                                            ?>
+                                        </form>
+                                    </div>
+                                    <div class="float-right mr-2">
+                                        <form action="save.php" method="POST">
+                                            <?php
+                                            $query1 = "SELECT * FROM saved_posts WHERE post_id = ? AND user_id = ?";
+                                            $stmt1 = $pdo->prepare($query1);
+                                            $stmt1->execute([$post['post_id'], $_SESSION['user_id']]);
+                                            if ($stmt1->rowCount() == 0) {
+                                                echo '<span data-content_id="' . $post['post_id'] . '" class="mr-2 fs-2 font-weight-600 sign-a save" role="button">Save</span>';
+                                            } else {
+                                                echo '<span data-content_id="' . $post['post_id'] . '" class="mr-2 fs-2 font-weight-600 sign-a save" role="button">Saved</span>';
+                                            }
+                                            ?>
+                                        </form>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="mx-4 mt-3">
+                                        <?php
+                                        $query1 = "SELECT * FROM likes WHERE post_id = ?";
+                                        $stmt1 = $pdo->prepare($query1);
+                                        $stmt1->execute([$post['post_id']]);
+                                        $likes = $stmt1->rowCount();
+                                        ?>
+                                        <p class="fs-5 mb-2">Liked by <span class="font-weight-bolder" id="likes_p<?php echo $post['post_id']; ?>"><?php echo $likes; ?></span></p>
+                                    </div>
+                                    <div>
+                                        <textarea name="comment" class="comment border-top px-2 pt-2" placeholder="Add a comment ..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+<?php
+}
+?>
 <?php
 include_once './footer.php';
 ?>
