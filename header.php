@@ -12,10 +12,10 @@ include_once './session.php';
       <meta name="author" content="">
 
       <title>iConnect</title>
-      
+
       <!--Chose file-->
       <link href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/wtf-forms.css" rel="stylesheet">
-      
+
       <!-- Flaticon -->
       <link rel="stylesheet" type="text/css" href="css/flaticon.css">
 
@@ -36,6 +36,10 @@ include_once './session.php';
 
       <!-- Search -->
       <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+      <!-- Icon -->
+      <script src="https://kit.fontawesome.com/43b4b9f81c.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>

@@ -22,6 +22,10 @@ textarea{
     width: 52%;
 }
 /*INDEX*/
+.btn-google {
+    color: white !important;
+    background-color: #ea4335 !important;
+}
 @media only screen and (max-width: 575px){
     .navbar-nav {
         -ms-flex-direction: row;

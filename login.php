@@ -22,8 +22,7 @@ include_once './header.php';
         <?php
             include_once './redirect.php';
         ?>
-        <p class="fs-2 b font-weight-bolder">login with google</p>
-
+        <br>
         <a href="#" class="fs-1 c-00376B">Forgot password?</a>
         
     </div>
