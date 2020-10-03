@@ -6,19 +6,19 @@ include_once './database.php';
 <div class="d-flex justify-content-center custom-index-div">
     <div class="">
         <?php
-        $query = "SELECT DISTINCT u.profile_pic AS profile_pic, u.id AS id, u.username AS username, p.description AS description, i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id
+        $query = "SELECT DISTINCT p.id AS post_id, u.profile_pic AS profile_pic, u.id AS id, u.username AS username, p.description AS description, i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id
         INNER JOIN followers f ON u.id = f.user_id WHERE f.follower_id = ? ORDER BY p.date DESC";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$_SESSION['user_id']]);
         if ($stmt->rowCount() == 0) {
-            $query = "SELECT DISTINCT u.profile_pic AS profile_pic, u.id AS id, u.username AS username, p.description AS description, i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id
+            $query = "SELECT DISTINCT p.id AS post_id, u.profile_pic AS profile_pic, u.id AS id, u.username AS username, p.description AS description, i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id
             WHERE u.id != ? ORDER BY RAND() LIMIT 1";
             $stmt = $pdo->prepare($query);
             $stmt->execute([$_SESSION['user_id']]);
         }
-        while ($post = $stmt->fetch()) {
+        for ($i = 0; $post = $stmt->fetch(); $i++) {
         ?>
-            <div class="bg-white my-5 border">
+            <div class="bg-white my-5 border" id="<?php echo 'p' . $i; ?>">
                 <form action="profile_session.php" method="POST">
                     <div class="m-2 align-middle" role="button" onclick="this.parentNode.submit();">
                         <input type=" number" name="id" value="<?php echo $post['id']; ?>" hidden>
@@ -41,7 +41,15 @@ include_once './database.php';
                 </div>
                 <div class="mt-2">
                     <div class="float-left">
-                        <a class="" href="#"><span class="flaticon-heart1"></span></a>
+                        <form action="like.php" method="POST">
+                            <input type="text" value="<?php echo 'p' . $i; ?>" hidden name="redirect">
+                            <input type="number" value="<?php echo $post['post_id']; ?>" hidden name="post_id">
+                            <?php
+                                
+                            ?>
+                            <span role="button" onclick="this.parentNode.submit();" class="flaticon-heart1"></span>
+                        </form>
+
                     </div>
                     <div class="float-right mr-2">
                         <a class="mr-2" href="#">Save</span></a>
@@ -52,7 +60,7 @@ include_once './database.php';
                     <p class="fs-1 mb-2">Liked by <span class="font-weight-bolder">1024</span></p>
                 </div>
                 <div class="ml-4">
-                    <p class="fs-1 mb-1"><span class="font-weight-bolder">anze_gorsek</span> Sprostitev po šoli ;)</p>
+                    <p class="fs-1 mb-1"><span class="font-weight-bolder">anze_gorsek</span> Sprostitev po šoli</p>
                 </div>
                 <div class="ml-4">
                     <p class="fs-2 mb-1 text-black-50">View all <span>21</span> comments</p>
