@@ -19,6 +19,9 @@ include_once './header.php';
 
         <hr class="w-75 bc-dbdbdb mb-4">
         <p class="fs-2 b font-weight-bolder">login with facebook</p>
+        <?php
+            include_once './redirect.php';
+        ?>
         <p class="fs-2 b font-weight-bolder">login with google</p>
 
         <a href="#" class="fs-1 c-00376B">Forgot password?</a>
