@@ -45,19 +45,43 @@ include_once './database.php';
                             <input type="text" value="<?php echo 'p' . $i; ?>" hidden name="redirect">
                             <input type="number" value="<?php echo $post['post_id']; ?>" hidden name="post_id">
                             <?php
-                                
+                            $query1 = "SELECT * FROM likes WHERE post_id = ? AND user_id = ?";
+                            $stmt1 = $pdo->prepare($query1);
+                            $stmt1->execute([$post['post_id'], $_SESSION['user_id']]);
+                            if ($stmt1->rowCount() == 0) {
+                                echo '<span role="button" onclick="this.parentNode.submit();" class="flaticon-heart"></span>';
+                            } else {
+                                echo '<span role="button" onclick="this.parentNode.submit();" class="flaticon-heart1"></span>';
+                            }
                             ?>
-                            <span role="button" onclick="this.parentNode.submit();" class="flaticon-heart1"></span>
                         </form>
-
                     </div>
                     <div class="float-right mr-2">
-                        <a class="mr-2" href="#">Save</span></a>
+                        <form action="save.php" method="POST">
+                            <input type="text" value="<?php echo 'p' . $i; ?>" hidden name="redirect">
+                            <input type="number" value="<?php echo $post['post_id']; ?>" hidden name="post_id">
+                            <?php
+                            $query1 = "SELECT * FROM saved_posts WHERE post_id = ? AND user_id = ?";
+                            $stmt1 = $pdo->prepare($query1);
+                            $stmt1->execute([$post['post_id'], $_SESSION['user_id']]);
+                            if ($stmt1->rowCount() == 0) {
+                                echo '<span class="mr-2 fs-2 font-weight-600 sign-a" role="button" onclick="this.parentNode.submit();">Save</span>';
+                            } else {
+                                echo '<span class="mr-2 fs-2 font-weight-600 sign-a" role="button" onclick="this.parentNode.submit();">Saved</span>';
+                            }
+                            ?>
+                        </form>
                     </div>
                     <div class="clearfix"></div>
                 </div>
                 <div class="mt-2 ml-4">
-                    <p class="fs-1 mb-2">Liked by <span class="font-weight-bolder">1024</span></p>
+                    <?php
+                    $query1 = "SELECT * FROM likes WHERE post_id = ?";
+                    $stmt1 = $pdo->prepare($query1);
+                    $stmt1->execute([$post['post_id']]);
+                    $likes = $stmt1->rowCount();
+                    ?>
+                    <p class="fs-1 mb-2">Liked by <span class="font-weight-bolder"><?php echo $likes ?></span></p>
                 </div>
                 <div class="ml-4">
                     <p class="fs-1 mb-1"><span class="font-weight-bolder">anze_gorsek</span> Sprostitev po šoli</p>

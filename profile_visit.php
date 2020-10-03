@@ -75,6 +75,7 @@ $user = $stmt->fetch();
     <hr>
     <div>
         <div class="container">
+            <h2 class="text-center mt-0 mb-3 instantgram font-weight-normal text-capitalize"><?php echo $user['username']; ?>'s posts</h2>
             <div class='row row-cols-1 row-cols-md-2 row-cols-lg-3'>
                 <?php
                 $query = "SELECT DISTINCT i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id WHERE u.id = ? ORDER BY p.date DESC";
