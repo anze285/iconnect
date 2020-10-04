@@ -45,7 +45,7 @@ $user = $stmt->fetch();
                                 <div class="modal-body">
                                     <input type="file" required="required" name="fileToUpload" accept="image/*">
                                     <input type=" text" placeholder="Description" name="description">
-                                    <input type="text" placeholder="Destination" name="destination">
+                                    <input type="text" placeholder="Destination" name="destination" maxlength="20">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -30,6 +30,10 @@ if (empty($user['profile_pic'])) {
         }
         for (; $post = $stmt->fetch(); $j++) {
             $shownposts[$j] = $post['post_id'];
+            $query1 = "SELECT l.title AS title FROM locations l INNER JOIN posts p ON l.id=p.location_id WHERE p.id = ?";
+            $stmt1 = $pdo->prepare($query1);
+            $stmt1->execute([$post['post_id']]);
+            $location = $stmt1->fetch();
         ?>
             <div class="bg-white my-5 border">
                 <form action="profile_session.php" method="POST">
@@ -47,6 +51,7 @@ if (empty($user['profile_pic'])) {
                         }
                         ?>
                         <span class="font-weight-bolder fs-2 mt-1"><?php echo $post['username']; ?></span>
+                        <span class="float-right mt-2 mr-3"><?php echo $location['title']; ?></span>
                     </div>
                 </form>
                 <div class="mt-2">
