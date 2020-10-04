@@ -15,6 +15,38 @@ textarea{
     box-shadow: none !important;
 }
 /*EDIT USER*/
+.fs-custom{
+    font-size: 0.9rem !important;
+}
+.comment {
+    width: 92%;
+    border: none;
+    resize: none;
+    height: 100px;
+}
+@media only screen and (min-width: 768px) {
+    .fs-custom {
+        font-size: 0.8rem !important;
+    }
+    .comment {
+        margin: 0 auto !important;
+        width: 97%;
+        border: none;
+        resize: none;
+        height: 70px;
+    }
+}
+@media only screen and (min-width: 1200px) {
+    .fs-custom {
+        font-size: 0.9rem !important;
+    }
+    .comment {
+        width: 98%;
+        border: none;
+        resize: none;
+        height: 90px;
+    }
+}
 .w-35 {
     width: 35%;
 }
@@ -22,13 +54,6 @@ textarea{
     width: 52%;
 }
 /*INDEX*/
-.comment{
-    margin: 0 auto !important;
-    width: 99%;
-    border: none;
-    resize: none;
-    height: 100px;
-}
 .btn-google {
     color: white !important;
     background-color: #ea4335 !important;
@@ -56,22 +81,22 @@ textarea{
 }
 @media only screen and (min-width: 768px) {
     .scrollbar {
-        height: 150px !important;
+        height: 190px !important;
     }
     .d-670-block{
         display: block !important;
     }
     .h-auto {
-        height: 400px !important;
+        height: 462px !important;
     }
 
     .w-model {
-        height: 400px;
-        width: 666px !important;
+        height: 462px;
+        width: 770px !important;
     }
 
     .img-cover {
-        height: 398px;
+        height: 460px;
     }
 }
 @media only screen and (min-width: 1200px) {

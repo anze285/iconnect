@@ -109,6 +109,27 @@ include_once './session.php';
                         })
                   });
             });
+            $(document).ready(function() {
+                  $(".commenttext").on('click', function() {
+                        var post_id = $(this).data('content_id');
+                        var comment = $("#comment" + post_id).val();
+                        var user = $("#username1").val();
+                        var profile_pic = $("#profile_pic1").val();
+                        $.ajax({
+                              url: 'comment.php',
+                              type: 'POST',
+                              data: {
+                                    post_id: post_id,
+                                    comment: comment
+                              },
+                              success: function(data) {
+                                    if (data == 'done') {
+                                          $('#commentstext' + post_id).html($('#commentstext' + post_id).html() + '<div class="mx-2"><img class="mb-1 custom-img1 mr-3" src="'+profile_pic+'" alt="profile-pic"><span class="font-weight-bolder fs-2 mt-1 fs-custom">'+user+'</span><p class="ml-3 fs-custom">' + comment + '</p></div>');
+                                    }
+                              }
+                        })
+                  });
+            });
       </script>
       <?php
       if (isset($_SESSION['user_id'])) {
@@ -152,17 +173,6 @@ include_once './session.php';
                                                 </div>
                                           </div>
                                     </li>
-                                    <!--<li class="nav-item dropdown">
-                                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Dropdown
-                                          </a>
-                                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Something else here</a>
-                                          </div>
-                                    </li>-->
                               </ul>
                         </div>
                   </nav>
