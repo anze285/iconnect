@@ -325,16 +325,13 @@ textarea{
     float: left;
     height: 300px;
     overflow-y: scroll;
-    width: inherit;
+    width: 100%;
 }
 #wrapper
 {
 	text-align: center;
 	width: 500px;
 	margin: auto;
-}
-.force-overflow {
-    min-height: 450px;
 }
 
 #style-3::-webkit-scrollbar {

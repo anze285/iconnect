@@ -187,7 +187,7 @@ if (empty($user['profile_pic'])) {
 </div>
 <?php
 for ($i = 0; $i < $j; $i++) {
-    $query = "SELECT DISTINCT u.id AS user_id, u.profile_pic AS profile_pic, u.username AS username, p.id AS post_id, i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id WHERE p.id = ? ORDER BY p.date DESC";
+    $query = "SELECT u.id AS user_id, u.profile_pic AS profile_pic, u.username AS username, p.id AS post_id, i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id WHERE p.id = ? ORDER BY p.date DESC";
     $stmt = $pdo->prepare($query);
     $stmt->execute([$shownposts[$i]]);
     $post = $stmt->fetch();
@@ -224,11 +224,21 @@ for ($i = 0; $i < $j; $i++) {
                                 <div id="wraper" class="pr-1 pl-2">
                                     <div class="scrollbar" id="style-3">
                                         <div class="force-overflow" id="commentstext<?php echo $post['post_id']; ?>">
-                                            <div class="mx-2">
-                                                <img class="mb-1 custom-img1 mr-3" src="images/profile.png" alt="profile-pic">
-                                                <span class="font-weight-bolder fs-2 mt-1 fs-custom">Marcel_matko_sotosek</span>
-                                                <p class="ml-3 fs-custom">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis illum odit deleniti! Aliquam similique sint ipsam cupiditate sapiente, explicabo et numquam molestias nobis consectetur maxime, debitis mollitia! Velit, rerum assumenda!</p>
-                                            </div>
+                                            <?php
+                                            $query1 = "SELECT u.profile_pic AS profile_pic, u.username AS username, c.message AS message FROM users u INNER JOIN comments c ON u.id=c.user_id INNER JOIN posts p ON p.id=c.post_id WHERE post_id = ?";
+                                            $stmt1 = $pdo->prepare($query1);
+                                            $stmt1->execute([$post['post_id']]);
+                                            while ($comment = $stmt1->fetch()) {
+                                            ?>
+                                                    <div class="mx-2">
+                                                        <img class="mb-1 custom-img1 mr-3" src="<?php echo $comment['profile_pic']; ?>" alt="profile-pic">
+                                                        <span class="font-weight-bolder fs-2 mt-1 fs-custom"><?php echo $comment['username']; ?></span>
+                                                        <p class="ml-3 fs-custom"><?php echo $comment['message']; ?></p>
+                                                    </div>
+                                            <?php
+                                            }
+                                            ?>
+
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>
