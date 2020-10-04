@@ -38,10 +38,13 @@ for ($i = 0; $i < $j; $i++) {
                                     <div class="scrollbar" id="style-3">
                                         <div class="force-overflow" id="commentstext<?php echo $post['post_id']; ?>">
                                             <?php
-                                            $query1 = "SELECT u.profile_pic AS profile_pic, u.username AS username, c.message AS message FROM users u INNER JOIN comments c ON u.id=c.user_id INNER JOIN posts p ON p.id=c.post_id WHERE post_id = ?";
+                                            $query1 = "SELECT u.profile_pic AS profile_pic, u.username AS username, c.message AS message FROM users u INNER JOIN comments c ON u.id=c.user_id INNER JOIN posts p ON p.id=c.post_id WHERE c.post_id = ? ORDER BY c.date DESC";
                                             $stmt1 = $pdo->prepare($query1);
                                             $stmt1->execute([$post['post_id']]);
                                             while ($comment = $stmt1->fetch()) {
+                                                if (empty($comment['profile_pic'])) {
+                                                    $comment['profile_pic'] = 'images/profile.png';
+                                                }
                                             ?>
                                                 <div class="mx-2">
                                                     <img class="mb-1 custom-img1 mr-3" src="<?php echo $comment['profile_pic']; ?>" alt="profile-pic">

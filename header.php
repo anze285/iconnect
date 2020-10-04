@@ -128,7 +128,8 @@ include_once './session.php';
                               },
                               success: function(data) {
                                     if (data == 'done') {
-                                          $('#commentstext' + post_id).html($('#commentstext' + post_id).html() + '<div class="mx-2"><img class="mb-1 custom-img1 mr-3" src="' + profile_pic + '" alt="profile-pic"><span class="font-weight-bolder fs-2 mt-1 fs-custom">' + user + '</span><p class="ml-3 fs-custom">' + comment + '</p></div>');
+                                          //$('#commentstext' + post_id).html($('#commentstext' + post_id).html() + '<div class="mx-2"><img class="mb-1 custom-img1 mr-3" src="' + profile_pic + '" alt="profile-pic"><span class="font-weight-bolder fs-2 mt-1 fs-custom">' + user + '</span><p class="ml-3 fs-custom">' + comment + '</p></div>');
+                                          $('#commentstext' + post_id).html('<div class="mx-2"><img class="mb-1 custom-img1 mr-3" src="' + profile_pic + '" alt="profile-pic"><span class="font-weight-bolder fs-2 mt-1 fs-custom">' + user + '</span><p class="ml-3 fs-custom">' + comment + '</p></div>' + $('#commentstext' + post_id).html());
                                     }
                               }
                         })

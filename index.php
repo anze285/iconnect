@@ -8,7 +8,7 @@ $stmt = $pdo->prepare($query);
 $stmt->execute([$_SESSION['user_id']]);
 $user = $stmt->fetch();
 if (empty($user['profile_pic'])) {
-    $user['profile_pic'] = '/images/profile.png';
+    $user['profile_pic'] = 'images/profile.png';
 }
 ?>
 <input type="text" value="<?php echo $user['profile_pic'] ?>" id="profile_pic1" hidden>

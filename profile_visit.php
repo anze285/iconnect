@@ -5,14 +5,18 @@ $query = "SELECT name, username, bio, profile_pic FROM users WHERE id = ?";
 $stmt = $pdo->prepare($query);
 $stmt->execute([$_SESSION['profile_id']]);
 $user = $stmt->fetch();
+$query = "SELECT name, username, bio, profile_pic FROM users WHERE id = ?";
+$stmt = $pdo->prepare($query);
+$stmt->execute([$_SESSION['user_id']]);
+$user1 = $stmt->fetch();
 $shownposts = array();
 $j = 0;
-if (empty($user['profile_pic'])) {
-    $user['profile_pic'] = '/images/profile.png';
+if (empty($user1['profile_pic'])) {
+    $user1['profile_pic'] = 'images/profile.png';
 }
 ?>
-<input type="text" value="<?php echo $user['profile_pic'] ?>" id="profile_pic1" hidden>
-<input type="text" value="<?php echo $user['username'] ?>" id="username1" hidden>
+<input type="text" value="<?php echo $user1['profile_pic'] ?>" id="profile_pic1" hidden>
+<input type="text" value="<?php echo $user1['username'] ?>" id="username1" hidden>
 
 <div class="container-fluid mt-5 pt-md-4 w-custom">
     <div class="row justify-content-md-center px-5 pt-2">
