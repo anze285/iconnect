@@ -6,7 +6,15 @@ $query = "SELECT name, username, bio, profile_pic FROM users WHERE id = ?";
 $stmt = $pdo->prepare($query);
 $stmt->execute([$_SESSION['user_id']]);
 $user = $stmt->fetch();
+$shownposts = array();
+$j = 0;
+if (empty($user['profile_pic'])) {
+    $user['profile_pic'] = '/images/profile.png';
+}
 ?>
+<input type="text" value="<?php echo $user['profile_pic'] ?>" id="profile_pic1" hidden>
+<input type="text" value="<?php echo $user['username'] ?>" id="username1" hidden>
+
 <div class="container-fluid mt-5 pt-md-4 w-custom">
     <div class="row justify-content-md-center px-5 pt-2">
         <div class="col-auto justify-content-center px-5">
@@ -94,17 +102,18 @@ $user = $stmt->fetch();
             <div class='row row-cols-1 row-cols-md-2 row-cols-lg-3'>
 
                 <?php
-                $query = "SELECT post_id AS id FROM saved_posts WHERE user_id = ? ORDER BY date DESC";
+                $query = "SELECT post_id AS post_id FROM saved_posts WHERE user_id = ? ORDER BY date DESC";
                 $stmt = $pdo->prepare($query);
                 $stmt->execute([$_SESSION['user_id']]);
-                while ($post_id = $stmt->fetch()) {
+                for (; $post = $stmt->fetch(); $j++) {
+                    $shownposts[$j] = $post['post_id'];
                     $query1 = "SELECT DISTINCT i.root AS root FROM  posts p INNER JOIN images i ON p.id=i.post_id WHERE p.id = ?";
                     $stmt1 = $pdo->prepare($query1);
-                    $stmt1->execute([$post_id['id']]);
+                    $stmt1->execute([$post['post_id']]);
                     $post = $stmt1->fetch();
                 ?>
                     <div class="col mb-4">
-                        <img class="img-fluid img-strech" src="<?php echo $post['root']; ?>" alt="post-pic">
+                        <img class="img-fluid img-strech" src="<?php echo $post['root']; ?>" alt="post-pic" type="button" data-toggle="modal" data-target="#postmodal<?php echo $j; ?>">
                     </div>
 
                 <?php
@@ -114,7 +123,7 @@ $user = $stmt->fetch();
             </div>
 
         </div>
-
-        <?php
-        include_once './footer.php';
-        ?>
+<?php
+include_once 'post_model.php';
+include_once './footer.php';
+?>

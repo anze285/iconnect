@@ -97,5 +97,6 @@ $user = $stmt->fetch();
         </div>
 
         <?php
+        include_once 'post_model.php';
         include_once './footer.php';
         ?>
