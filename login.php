@@ -18,8 +18,8 @@ include_once './header.php';
         </form>
 
         <hr class="w-75 bc-dbdbdb mb-4">
-        <p class="fs-2 b font-weight-bolder">login with facebook</p>
         <?php
+            include_once 'facebook_login.php';
             include_once './redirect.php';
         ?>
         <br>

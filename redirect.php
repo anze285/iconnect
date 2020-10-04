@@ -51,9 +51,6 @@ if (isset($_GET['code'])) {
     else{
         $_SESSION['login_error'] = "Something went wrong with google login";
     }
-    echo $user['id'];
-    echo $_SESSION['user_id'];
-    echo $_SESSION['login_error'];
     header("Location: index.php");
   // now you can use this profile info to create account in your website and make user logged in.
 } else {

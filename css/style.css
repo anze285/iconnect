@@ -231,6 +231,10 @@ textarea{
 .login-main, .registration-main, .password-main{
     text-align: center;
 }
+.btn-facebook {
+    color: white !important;
+    background-color: #3b5998 !important;
+}
 .login-content, .registration-content{
     background-color: white;
     border: 1px solid #dbdbdb;
