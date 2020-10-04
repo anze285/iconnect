@@ -66,7 +66,7 @@ include_once './session.php';
             $(document).ready(function() {
                   $(".like").on('click', function() {
                         var post_id = $(this).data('content_id');
-                        var likes = parseInt($("#likes" + post_id).html());
+                        var likes = parseInt($("#likes_p" + post_id).html());
                         $.ajax({
                               url: 'like.php',
                               type: 'POST',
