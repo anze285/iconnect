@@ -1,13 +1,19 @@
 <?php
 include_once './header.php';
 include_once './database.php';
-?>
-<?php
 $query = "SELECT name, username, bio, profile_pic FROM users WHERE id = ?";
 $stmt = $pdo->prepare($query);
 $stmt->execute([$_SESSION['profile_id']]);
 $user = $stmt->fetch();
+$shownposts = array();
+$j = 0;
+if (empty($user['profile_pic'])) {
+    $user['profile_pic'] = '/images/profile.png';
+}
 ?>
+<input type="text" value="<?php echo $user['profile_pic'] ?>" id="profile_pic1" hidden>
+<input type="text" value="<?php echo $user['username'] ?>" id="username1" hidden>
+
 <div class="container-fluid mt-5 pt-md-4 w-custom">
     <div class="row justify-content-md-center px-5 pt-2">
         <div class="col-auto justify-content-center px-5">
@@ -78,14 +84,15 @@ $user = $stmt->fetch();
             <h2 class="text-center mt-0 mb-3 instantgram font-weight-normal text-capitalize"><?php echo $user['username']; ?>'s posts</h2>
             <div class='row row-cols-1 row-cols-md-2 row-cols-lg-3'>
                 <?php
-                $query = "SELECT DISTINCT i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id WHERE u.id = ? ORDER BY p.date DESC";
+                $query = "SELECT DISTINCT p.id AS post_id, i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id WHERE u.id = ? ORDER BY p.date DESC";
                 $stmt = $pdo->prepare($query);
                 $stmt->execute([$_SESSION['profile_id']]);
-                while ($post = $stmt->fetch()) {
+                for (; $post = $stmt->fetch(); $j++) {
+                    $shownposts[$j] = $post['post_id'];
 
                 ?>
                     <div class="col mb-4">
-                        <img class="img-fluid img-strech" src="<?php echo $post['root']; ?>" alt="post-pic">
+                        <img class="img-fluid img-strech" src="<?php echo $post['root']; ?>" alt="post-pic" type="button" data-toggle="modal" data-target="#postmodal<?php echo $j; ?>">
                     </div>
 
                 <?php

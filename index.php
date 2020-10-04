@@ -65,9 +65,9 @@ if (empty($user['profile_pic'])) {
                             $stmt1 = $pdo->prepare($query1);
                             $stmt1->execute([$post['post_id'], $_SESSION['user_id']]);
                             if ($stmt1->rowCount() == 0) {
-                                echo '<span data-content_id="' . $post['post_id'] . '" role="button" class="like"><span class="flaticon-heart"></span></span>';
+                                echo '<span data-content_id="' . $post['post_id'] . '" role="button" class="like" id="like1' . $post['post_id'] . '"><span class="flaticon-heart"></span></span>';
                             } else {
-                                echo '<span data-content_id="' . $post['post_id'] . '" role="button" class="like"><span class="flaticon-heart1"></span></span>';
+                                echo '<span data-content_id="' . $post['post_id'] . '" role="button" class="like" id="like1' . $post['post_id'] . '"><span class="flaticon-heart1"></span></span>';
                             }
                             ?>
                         </form>
@@ -79,9 +79,9 @@ if (empty($user['profile_pic'])) {
                             $stmt1 = $pdo->prepare($query1);
                             $stmt1->execute([$post['post_id'], $_SESSION['user_id']]);
                             if ($stmt1->rowCount() == 0) {
-                                echo '<span data-content_id="' . $post['post_id'] . '" class="mr-2 fs-2 font-weight-600 sign-a save" role="button">Save</span>';
+                                echo '<span data-content_id="' . $post['post_id'] . '" class="mr-2 fs-2 font-weight-600 sign-a save" role="button" id="save1' . $post['post_id'] . '">Save</span>';
                             } else {
-                                echo '<span data-content_id="' . $post['post_id'] . '" class="mr-2 fs-2 font-weight-600 sign-a save" role="button">Saved</span>';
+                                echo '<span data-content_id="' . $post['post_id'] . '" class="mr-2 fs-2 font-weight-600 sign-a save" role="button" id="save1' . $post['post_id'] . '">Saved</span>';
                             }
                             ?>
                         </form>

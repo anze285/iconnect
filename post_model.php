@@ -65,9 +65,9 @@ for ($i = 0; $i < $j; $i++) {
                                             $stmt1 = $pdo->prepare($query1);
                                             $stmt1->execute([$post['post_id'], $_SESSION['user_id']]);
                                             if ($stmt1->rowCount() == 0) {
-                                                echo '<span data-content_id="' . $post['post_id'] . '" role="button" class="like fs-custom"><span class="flaticon-heart"></span></span>';
+                                                echo '<span data-content_id="' . $post['post_id'] . '" role="button" class="like fs-custom" id="like' . $post['post_id'] . '"><span class="flaticon-heart"></span></span>';
                                             } else {
-                                                echo '<span data-content_id="' . $post['post_id'] . '" role="button" class="like fs-custom"><span class="flaticon-heart1"></span></span>';
+                                                echo '<span data-content_id="' . $post['post_id'] . '" role="button" class="like fs-custom" id="like' . $post['post_id'] . '"><span class="flaticon-heart1"></span></span>';
                                             }
                                             ?>
                                         </form>
@@ -79,9 +79,9 @@ for ($i = 0; $i < $j; $i++) {
                                             $stmt1 = $pdo->prepare($query1);
                                             $stmt1->execute([$post['post_id'], $_SESSION['user_id']]);
                                             if ($stmt1->rowCount() == 0) {
-                                                echo '<span data-content_id="' . $post['post_id'] . '" class="fs-custom mr-2 fs-2 font-weight-600 sign-a save" role="button">Save</span>';
+                                                echo '<span data-content_id="' . $post['post_id'] . '" class="fs-custom mr-2 fs-2 font-weight-600 sign-a save" role="button" id="save' . $post['post_id'] . '">Save</span>';
                                             } else {
-                                                echo '<span data-content_id="' . $post['post_id'] . '" class="fs-custom mr-2 fs-2 font-weight-600 sign-a save" role="button">Saved</span>';
+                                                echo '<span data-content_id="' . $post['post_id'] . '" class="fs-custom mr-2 fs-2 font-weight-600 sign-a save" role="button" id="save' . $post['post_id'] . '">Saved</span>';
                                             }
                                             ?>
                                         </form>

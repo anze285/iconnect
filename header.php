@@ -78,12 +78,14 @@ include_once './session.php';
                                           likes = likes + 1;
                                           $("#likes" + post_id).html(likes);
                                           $("#likes_p" + post_id).html(likes);
-                                          $(".like").html('<span class="flaticon-heart1"></span>');
+                                          $("#like" + post_id).html('<span class="flaticon-heart1"></span>');
+                                          $("#like1" + post_id).html('<span class="flaticon-heart1"></span>');
                                     } else if (data == 'done1') {
                                           likes = likes - 1;
                                           $("#likes_p" + post_id).html(likes);
                                           $("#likes" + post_id).html(likes);
-                                          $(".like").html('<span class="flaticon-heart"></span>');
+                                          $("#like" + post_id).html('<span class="flaticon-heart"></span>');
+                                          $("#like1" + post_id).html('<span class="flaticon-heart"></span>');
                                     }
                               }
                         })
@@ -100,9 +102,11 @@ include_once './session.php';
                               },
                               success: function(data) {
                                     if (data == 'done') {
-                                          $(".save").html('Saved');
+                                          $("#save" + post_id).html('Saved');
+                                          $("#save1" + post_id).html('Saved');
                                     } else if (data == 'done1') {
-                                          $(".save").html('Save');
+                                          $("#save" + post_id).html('Save');
+                                          $("#save1" + post_id).html('Save');
 
                                     }
                               }
@@ -124,7 +128,7 @@ include_once './session.php';
                               },
                               success: function(data) {
                                     if (data == 'done') {
-                                          $('#commentstext' + post_id).html($('#commentstext' + post_id).html() + '<div class="mx-2"><img class="mb-1 custom-img1 mr-3" src="'+profile_pic+'" alt="profile-pic"><span class="font-weight-bolder fs-2 mt-1 fs-custom">'+user+'</span><p class="ml-3 fs-custom">' + comment + '</p></div>');
+                                          $('#commentstext' + post_id).html($('#commentstext' + post_id).html() + '<div class="mx-2"><img class="mb-1 custom-img1 mr-3" src="' + profile_pic + '" alt="profile-pic"><span class="font-weight-bolder fs-2 mt-1 fs-custom">' + user + '</span><p class="ml-3 fs-custom">' + comment + '</p></div>');
                                     }
                               }
                         })
