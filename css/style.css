@@ -53,6 +53,9 @@ textarea{
 .w-60 {
     width: 52%;
 }
+.max-content{
+    width: max-content;
+}
 /*INDEX*/
 .btn-google {
     color: white !important;

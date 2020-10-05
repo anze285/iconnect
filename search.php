@@ -10,8 +10,9 @@ function search($text){
     $stmt = $pdo->prepare($query);
     $stmt->execute([$text, $text]);
 
-    echo '<form action="profile_session.php" method="POST">';
+    
 	for($i = 0; $user = $stmt->fetch(); $i++){
+        echo '<form action="profile_session.php" method="POST">';
         // show each usid, er as a link
         if($i != 0){
             echo '<div class="dropdown-divider my-0"></div>';
@@ -26,8 +27,8 @@ function search($text){
                             
         echo '</div><div class="my-auto pb-1"><span class="px-0 py-0" href="">'.$user['username']. '</span></div></div>';
 		echo '<input type="number" name="id" value="'.$user['id'].'" hidden>';
+        echo '</form>';
     }
-    echo '</form>';
 }
 // call the search function with the data sent from Ajax
 if (!empty($_GET['txt'])) {

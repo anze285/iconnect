@@ -71,14 +71,14 @@ if (empty($user1['profile_pic'])) {
                 $stmt->execute([$_SESSION['profile_id']]);
                 $followers = $stmt->fetch();
                 ?>
-                <span class="fs-profile"><span class="font-weight-bolder"><?php echo $post["count"]; ?></span><span class="mr-1 mr-sm-3"> followers</span></span>
+                <span class="fs-profile"><span class="font-weight-bolder"><?php echo $followers["count"]; ?></span><span class="mr-1 mr-sm-3"> followers</span></span>
                 <?php
                 $query = "SELECT COUNT(*) AS count FROM followers WHERE follower_id = ?";
                 $stmt = $pdo->prepare($query);
                 $stmt->execute([$_SESSION['profile_id']]);
                 $following = $stmt->fetch();
                 ?>
-                <span class="fs-profile"><span class="font-weight-bolder"><?php echo $post["count"]; ?></span><span class="mr-1 mr-sm-3"> following</span></span>
+                <span class="fs-profile"><span class="font-weight-bolder"><?php echo $following["count"]; ?></span><span class="mr-1 mr-sm-3"> following</span></span>
             </div>
             <div>
                 <span class="fs-profile font-weight-600"><?php echo $user['name']; ?></span>

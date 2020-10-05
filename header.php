@@ -12,7 +12,7 @@ include_once './session.php';
       <meta name="author" content="">
 
       <title>iConnect</title>
-
+      <link rel="icon" type="image/png" href="images/favicon.ico">
       <!--Chose file-->
       <link href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/wtf-forms.css" rel="stylesheet">
 
@@ -160,14 +160,21 @@ include_once './session.php';
                                           <a class="nav-link" href="index.php"><span class="flaticon-home"></span></a>
                                     </li>
                                     <li class="nav-item">
-                                          <a class="nav-link" href="#"><span class="flaticon-compass-1"></span></a>
-                                    </li>
-                                    <li class="nav-item">
-                                          <a class="nav-link" href="#"><span class="flaticon-heart"></span></a>
+                                          <a class="nav-link" href="discoveries.php"><span class="flaticon-compass-1"></span></a>
                                     </li>
                                     <li class="nav-item">
                                           <div class="dropdown">
-                                                <a class="mt-4" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <a class="nav-link pb-0" role="button" id="dropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="flaticon-heart"></span></a>
+                                                <div class="dropdown-menu dropdown-menu-right mt-0" aria-labelledby="dropdownMenuLink1">
+                                                      <?php
+                                                      include_once 'notifications.php';
+                                                      ?>
+                                                </div>
+                                          </div>
+                                    </li>
+                                    <li class="nav-item">
+                                          <div class="dropdown">
+                                                <a class="mt-4" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                       <span class="flaticon-user profile-pic"></span>
                                                 </a>
 
