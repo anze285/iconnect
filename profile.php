@@ -170,10 +170,10 @@ if (empty($user['profile_pic'])) {
                 <div>
                     <span class="fs-profile font-weight-600"><?php echo $user['name']; ?></span>
                 </div>
-                <div class="mt-1">
-                    <p class="fs-profile-sm"><?php echo $user['bio']; ?></p>
-                </div>
             </div>
+        </div>
+        <div class="mt-1">
+            <p class="fs-profile-sm"><?php echo $user['bio']; ?></p>
         </div>
     </div>
     <hr>

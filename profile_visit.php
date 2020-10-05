@@ -86,8 +86,8 @@ if (empty($user1['profile_pic'])) {
                                 $query = "SELECT u.id AS id, u.username AS username, u.profile_pic AS profile_pic FROM users u INNER JOIN followers f ON u.id=f.follower_id WHERE f.user_id = ?";
                                 $stmt = $pdo->prepare($query);
                                 $stmt->execute([$_SESSION['profile_id']]);
-                                if($stmt->rowCount()==0){
-                                    echo $user['username']." doesn't have any followers yet.";
+                                if ($stmt->rowCount() == 0) {
+                                    echo $user['username'] . " doesn't have any followers yet.";
                                 }
                                 for ($i = 0; $followers = $stmt->fetch(); $i++) {
                                     if (empty($followers['profile_pic'])) {
@@ -155,9 +155,9 @@ if (empty($user1['profile_pic'])) {
             <div>
                 <span class="fs-profile font-weight-600"><?php echo $user['name']; ?></span>
             </div>
-            <div class="mt-1">
-                <p class="fs-profile-sm"><?php echo $user['bio']; ?></p>
-            </div>
+        </div>
+        <div class="mt-1">
+            <p class="fs-profile-sm"><?php echo $user['bio']; ?></p>
         </div>
     </div>
     <hr>
