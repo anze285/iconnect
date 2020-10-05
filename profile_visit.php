@@ -156,9 +156,9 @@ if (empty($user1['profile_pic'])) {
                 <span class="fs-profile font-weight-600"><?php echo $user['name']; ?></span>
             </div>
         </div>
-        <div class="mt-1">
-            <p class="fs-profile-sm"><?php echo $user['bio']; ?></p>
-        </div>
+    </div>
+    <div class="mt-1">
+        <p class="fs-profile-sm"><?php echo $user['bio']; ?></p>
     </div>
     <hr>
     <div>

@@ -172,9 +172,9 @@ if (empty($user['profile_pic'])) {
                 </div>
             </div>
         </div>
-        <div class="mt-1">
-            <p class="fs-profile-sm"><?php echo $user['bio']; ?></p>
-        </div>
+    </div>
+    <div class="mt-1">
+        <p class="fs-profile-sm"><?php echo $user['bio']; ?></p>
     </div>
     <hr>
     <div>

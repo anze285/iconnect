@@ -1,7 +1,6 @@
 <?php
 include_once('session.php');
 include_once('database.php');
-
 $id = $_POST['id'];
 if(!empty($id)){
         $query = "DELETE FROM likes WHERE post_id = ?";
@@ -21,4 +20,6 @@ if(!empty($id)){
         $stmt->execute([$id]);
 }
 else{
+    
 }
+header("Location: index.php");

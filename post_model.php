@@ -75,12 +75,18 @@ for ($i = 0; $i < $j; $i++) {
                                             ?>
                                         </form>
                                     </div>
+                                    <?php 
+                                    if(isAdmin()){
+
+                                    
+                                    ?>
                                     <div class="float-right mr-2">
                                         <form action="delete_post.php" method="POST">
                                             <input type=" number" name="id" value="<?php echo $post['post_id']; ?>" hidden>
                                             <span class=" fs-custom mr-2 fs-2 font-weight-600 sign-a save" role="button" onclick="this.parentNode.submit();">Delete</span>
                                         </form>
                                     </div>
+                                    <?php }?>
                                     <div class="float-right mr-2">
                                         <form action=" save.php" method="POST">
                                             <?php
