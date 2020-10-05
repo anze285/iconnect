@@ -3,6 +3,12 @@ include_once 'database.php';
 $query = "SELECT id FROM followers WHERE user_id = ? ORDER BY date DESC LIMIT 5";
 $stmt = $pdo->prepare($query);
 $stmt->execute([$_SESSION['user_id']]);
+if($stmt->rowCount  () == 0){
+    echo "<div class'max-content'><span> </span></div>";
+    echo '<div class="d-flex justify-content-start px-1 py-1 max-content">';
+    echo "<div class='my-auto pb-1'><span>You don't have any followers yet.</span></div></div>";
+    
+}
 for($i = 0;$user = $stmt->fetch(); $i++){
     $query1 = "SELECT u.id AS id, u.profile_pic AS profile_pic, u.username AS username FROM users u INNER JOIN followers f ON u.id=f.follower_id WHERE f.id = ?";
     $stmt1 = $pdo->prepare($query1);
