@@ -4,8 +4,16 @@ include_once './session.php';
 
 $name = $_POST['name'];
 $email = $_POST['email'];
-$phone = $_POST['phone'];
+$phonee = $_POST['phone'];
 $bio = $_POST['bio'];
+$name =str_replace('<', '', $name);
+$name = str_replace('>', '', $name);
+$email = str_replace('<', '', $email);
+$email = str_replace('>', '', $email);
+$phone = str_replace('<', '', $phone);
+$phone = str_replace('>', '', $phone);
+$bio = str_replace('<', '', $bio);
+$bio = str_replace('>', '', $bio);
 
 if (!empty($name) && !empty($email)) {
     $query = "SELECT email FROM users WHERE id = ?";

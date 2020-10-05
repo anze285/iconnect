@@ -10,6 +10,15 @@ $username = $_POST['username'];
 $pass1 = $_POST['pass1'];
 $pass2 = $_POST['pass2'];
 $username = str_replace(' ', '_', $username);
+$name = str_replace('<', '', $name);
+$name = str_replace('>', '', $name);
+$email = str_replace('<', '', $email);
+$email = str_replace('>', '', $email);
+$phone = str_replace('<', '', $phone);
+$phone = str_replace('>', '', $phone);
+$username = str_replace('<', '', $username);
+$username = str_replace('>', '', $username);
+
 //preverim podatke, da so obvezi vnešeni
 
 if (!empty($name) && !empty($email) 

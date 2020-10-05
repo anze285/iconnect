@@ -4,6 +4,10 @@ include_once './session.php';
 
 $description = $_POST['description'];
 $destination = $_POST['destination'];
+$description = str_replace('<', '', $description);
+$description = str_replace('>', '', $description);
+$destination = str_replace('<', '', $destination);
+$destination = str_replace('>', '', $destination);
 //preverim podatke, da so obvezi vnešeni
 
 if (
@@ -68,10 +72,16 @@ if (
             } else {
                 $loc_id = $loc['id'];
             }
+            $query = "INSERT INTO posts (description, user_id, date,location_id) VALUES (?,?,CURRENT_TIMESTAMP(),?)";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([$description, $_SESSION['user_id'], $loc_id]);
         }
-        $query = "INSERT INTO posts (description, user_id, date,location_id) VALUES (?,?,CURRENT_TIMESTAMP(),?)";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute([$description, $_SESSION['user_id'],$loc_id]);
+        else{
+            $query = "INSERT INTO posts (description, user_id, date) VALUES (?,?,CURRENT_TIMESTAMP())";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([$description, $_SESSION['user_id']]);
+        }
+
 
         $query = "SELECT id FROM posts WHERE user_id=? ORDER BY id DESC LIMIT 1";
         $stmt = $pdo->prepare($query);

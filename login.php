@@ -28,7 +28,7 @@ include_once './header.php';
     </div>
     <div class="login-content d-flex justify-content-center align-items-center flex-column p-3 mb-0">
         <div class="">
-            <p class="fs-2 mb-0 font-weight-100">Don't have an account? <a href="registration.php" class="fs-2 font-weight-600 sign-a">Sing up</a></p>
+            <p class="fs-2 mb-0 font-weight-100">Don't have an account? <a href="registration.php" class="fs-2 font-weight-600 sign-a">Sign up</a></p>
         </div>
     </div>
 </div>

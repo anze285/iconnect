@@ -3,6 +3,8 @@ session_start();
 include_once './database.php';
 $email = $_POST['email'];
 $pass = $_POST['pass'];
+$email = str_replace('<', '', $email);
+$email = str_replace('>', '', $email);
 //preverim, če sem prejel podatke
 if (!empty($email) && !empty($pass)) {
     

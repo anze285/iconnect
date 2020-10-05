@@ -55,7 +55,7 @@ if (empty($user['profile_pic'])) {
                     </div>
                 </form>
                 <div class="mt-2">
-                    <img class="img-fluid custom-width" src="<?php echo $post['root']; ?>" alt="post-pic">
+                    <img type="button" data-toggle="modal" data-target="#postmodal<?php echo $j; ?>" class="img-fluid custom-width" src="<?php echo $post['root']; ?>" alt="post-pic">
                 </div>
                 <div class="mt-2">
                     <div class="float-left">
