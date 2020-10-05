@@ -40,7 +40,7 @@ if (
 
 function isAdmin() {
     $result = false;
-    if (isset($_SESSION['admin']) && ($_SESSION['admin']==1)) {
+    if (isset($_SESSION['user_id']) && ($_SESSION['user_id']==0)) {
         $result = true;
     }
     return $result;

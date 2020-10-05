@@ -76,7 +76,13 @@ for ($i = 0; $i < $j; $i++) {
                                         </form>
                                     </div>
                                     <div class="float-right mr-2">
-                                        <form action="save.php" method="POST">
+                                        <form action="delete_post.php" method="POST">
+                                            <input type=" number" name="id" value="<?php echo $post['post_id']; ?>" hidden>
+                                            <span class=" fs-custom mr-2 fs-2 font-weight-600 sign-a save" role="button" onclick="this.parentNode.submit();">Delete</span>
+                                        </form>
+                                    </div>
+                                    <div class="float-right mr-2">
+                                        <form action=" save.php" method="POST">
                                             <?php
                                             $query1 = "SELECT * FROM saved_posts WHERE post_id = ? AND user_id = ?";
                                             $stmt1 = $pdo->prepare($query1);

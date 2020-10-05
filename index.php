@@ -18,16 +18,25 @@ if (empty($user['profile_pic'])) {
 <div class="d-flex justify-content-center custom-index-div">
     <div class="">
         <?php
-        $query = "SELECT DISTINCT p.id AS post_id, u.profile_pic AS profile_pic, u.id AS id, u.username AS username, p.description AS description, i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id
-        INNER JOIN followers f ON u.id = f.user_id WHERE f.follower_id = ? ORDER BY p.date DESC";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute([$_SESSION['user_id']]);
-        if ($stmt->rowCount() == 0) {
+        if(isAdmin()){
             $query = "SELECT DISTINCT p.id AS post_id, u.profile_pic AS profile_pic, u.id AS id, u.username AS username, p.description AS description, i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id
-            WHERE u.id != ? ORDER BY RAND() LIMIT 1";
+            ORDER BY p.date DESC LIMIT 20";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute();
+        }
+        else{
+            $query = "SELECT DISTINCT p.id AS post_id, u.profile_pic AS profile_pic, u.id AS id, u.username AS username, p.description AS description, i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id
+            INNER JOIN followers f ON u.id = f.user_id WHERE f.follower_id = ? ORDER BY p.date DESC";
             $stmt = $pdo->prepare($query);
             $stmt->execute([$_SESSION['user_id']]);
+            if ($stmt->rowCount() == 0) {
+                $query = "SELECT DISTINCT p.id AS post_id, u.profile_pic AS profile_pic, u.id AS id, u.username AS username, p.description AS description, i.root AS root FROM users u INNER JOIN posts p ON u.id=p.user_id INNER JOIN images i ON p.id=i.post_id
+            WHERE u.id != ? ORDER BY RAND() LIMIT 1";
+                $stmt = $pdo->prepare($query);
+                $stmt->execute([$_SESSION['user_id']]);
+            }
         }
+        
         for (; $post = $stmt->fetch(); $j++) {
             $shownposts[$j] = $post['post_id'];
             $query1 = "SELECT l.title AS title FROM locations l INNER JOIN posts p ON l.id=p.location_id WHERE p.id = ?";

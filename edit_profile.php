@@ -53,25 +53,25 @@ $user = $stmt->fetch();
             <div class="form-group row">
                 <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm pl-md-5">Name</label>
                 <div class="col-sm-10">
-                    <input type="text" name="name" id="colFormLabelSm" class="form-control mb-1 w-75 border bg-fafafa fs-1 ml-md-4 mx-auto" value="<?php echo $user['name']; ?>" required="required" />
+                    <input type="text" name="name" id="colFormLabelSm1" class="form-control mb-1 w-75 border bg-fafafa fs-1 ml-md-4 mx-auto" value="<?php echo $user['name']; ?>" required="required" />
                 </div>
             </div>
             <div class="form-group row">
                 <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm pl-md-5">Email</label>
                 <div class="col-sm-10">
-                    <input type="email" name="email" id="colFormLabelSm" class="form-control mb-1 w-75 border bg-fafafa fs-1 ml-md-4 mx-auto" value="<?php echo $user['email']; ?>" required="required" />
+                    <input type="email" name="email" id="colFormLabelSm2" class="form-control mb-1 w-75 border bg-fafafa fs-1 ml-md-4 mx-auto" value="<?php echo $user['email']; ?>" required="required" />
                 </div>
             </div>
             <div class="form-group row">
                 <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm pl-md-5">Phone</label>
                 <div class="col-sm-10">
-                    <input type="text" name="phone" id="colFormLabelSm" class="form-control mb-1 w-75 border bg-fafafa fs-1 ml-md-4 mx-auto" value="<?php echo $user['phone_number']; ?>" />
+                    <input type="text" name="phone" id="colFormLabelSm3" class="form-control mb-1 w-75 border bg-fafafa fs-1 ml-md-4 mx-auto" value="<?php echo $user['phone_number']; ?>" />
                 </div>
             </div>
             <div class="form-group row">
                 <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm pl-md-5">Bio</label>
                 <div class="col-sm-10">
-                    <textarea name="bio" id="colFormLabelSm" class="form-control mb-1 w-75 border bg-fafafa fs-1 ml-md-4 mx-auto" style="height: 100px;"><?php echo $user['bio']; ?></textarea>
+                    <textarea name="bio" id="colFormLabelSm4" class="form-control mb-1 w-75 border bg-fafafa fs-1 ml-md-4 mx-auto" style="height: 100px;"><?php echo $user['bio']; ?></textarea>
                 </div>
             </div>
             <?php

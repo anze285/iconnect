@@ -59,9 +59,9 @@ if (empty($user['profile_pic'])) {
                                 </div>
                                 <form action="new_post.php" method="post" enctype="multipart/form-data">
                                     <div class="modal-body">
+                                        <input type=" text" placeholder="Description" name="description" class="mb-2"><br>
+                                        <input type="text" placeholder="Destination" name="destination" maxlength="20" class="mb-2"><br>
                                         <input type="file" required="required" name="fileToUpload" accept="image/*">
-                                        <input type=" text" placeholder="Description" name="description">
-                                        <input type="text" placeholder="Destination" name="destination" maxlength="20">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

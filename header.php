@@ -191,12 +191,6 @@ include_once './session.php';
                         </div>
                   </nav>
             </div>
-            <?php
-            if (isAdmin()) {
-            ?>
-            <?php
-            }
-            ?>
       <?php
       } else {
       ?>
