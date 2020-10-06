@@ -76,7 +76,7 @@ for ($i = 0; $i < $j; $i++) {
                                         </form>
                                     </div>
                                     <?php 
-                                    if(isAdmin()){
+                                    if(isAdmin() || $post['user_id'] == $_SESSION['user_id']){
 
                                     
                                     ?>
