@@ -23,7 +23,7 @@ include_once './header.php';
             include_once './redirect.php';
         ?>
         <br>
-        <!--<a href="forgoten_password.php" class="fs-1 c-00376B">Forgot password?</a>-->
+        <a href="#" class="fs-1 c-00376B">Forgot password?</a>
         
     </div>
     <div class="login-content d-flex justify-content-center align-items-center flex-column p-3 mb-0">
